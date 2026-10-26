@@ -1,0 +1,44 @@
+#!/bin/bash
+# Sahel agent demo launcher (macOS .app): finds the project, starts the server if port 5318 is free, opens the browser.
+URL="http://127.0.0.1:5318"
+APP="$(cd "$(dirname "$0")/../.." && pwd)"
+
+# Project folder: written by scripts/make-shortcut.sh; else the repo that contains this bundle; else ~/Desktop/sahel-agent-demo.
+PROJECT=""
+[ -f "$APP/Contents/Resources/project-path" ] && PROJECT="$(cat "$APP/Contents/Resources/project-path")"
+[ -f "$PROJECT/server.js" ] || PROJECT="$(cd "$APP/../.." 2>/dev/null && pwd)"
+[ -f "$PROJECT/server.js" ] || PROJECT="$HOME/Desktop/sahel-agent-demo"
+
+alert() {
+  /usr/bin/osascript -e "display dialog \"$1\" with title \"Sahel agent demo\" buttons {\"OK\"} default button 1 with icon caution" >/dev/null 2>&1
+}
+
+if [ ! -f "$PROJECT/server.js" ]; then
+  alert "Project folder not found. Expected: $PROJECT"
+  exit 1
+fi
+
+# Apps opened from Finder get a short PATH; add the login-shell PATH and the usual Node/Claude install folders.
+LOGIN_PATH="$(/bin/zsh -lc 'printf %s "$PATH"' 2>/dev/null)"
+NVM_BIN="$(ls -d "$HOME"/.nvm/versions/node/*/bin 2>/dev/null | tail -n 1)"
+export PATH="${LOGIN_PATH:+$LOGIN_PATH:}$HOME/.local/bin:$HOME/.claude/local:/opt/homebrew/bin:/usr/local/bin:${NVM_BIN:+$NVM_BIN:}$PATH"
+
+if /usr/sbin/lsof -nP -iTCP:5318 -sTCP:LISTEN >/dev/null 2>&1; then
+  /usr/bin/open "$URL"
+  exit 0
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  alert "Node.js 20+ is required: https://nodejs.org"
+  exit 1
+fi
+
+cd "$PROJECT" || exit 1
+mkdir -p logs
+if [ ! -d node_modules ]; then
+  npm install --omit=dev >> logs/server.log 2>&1
+fi
+
+# The server runs in the background and opens the browser once it is listening (SAHEL_OPEN=1).
+SAHEL_OPEN=1 nohup node server.js >> logs/server.log 2>&1 &
+exit 0

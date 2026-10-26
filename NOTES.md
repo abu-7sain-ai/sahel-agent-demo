@@ -22,10 +22,19 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
   - `lib/prompt.js` builds the system prompt: section 4 verbatim, then the operating rules, then all of `services.json`.
   - `lib/providers.js` holds the four providers.
   - `lib/redact.js` removes civil IDs and passport numbers.
+  - `lib/platform.js` handles Windows/macOS differences: CLI lookup, child PATH, Wi-Fi address, opening the browser.
+- **Launchers:** `assets/` holds the icons (png, ico, icns, svg), made by `scripts/make-icons.js`. `scripts/make-shortcut.ps1` creates the Windows Desktop shortcut. `mac/إيجنت سهل.app` is the macOS app, and `scripts/make-shortcut.sh` copies it to the Desktop.
 - **Knowledge:** `knowledge/services.json` has 40 agencies (6 covered) and 130 services. `knowledge/SOURCES.md` lists every source and what could not be confirmed. `knowledge/research-draft.json` keeps the raw research with full URLs and per-record notes.
 
 ## How to run
-- Windows: double-click `start-demo.bat`. Mac: double-click `start-demo.command`. Or run `npm install`, then `npm run demo`.
+- **Desktop icon «إيجنت سهل»:** double-click it. It starts the server only if it isn't running, then opens the browser. Create the icon once with:
+  - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\make-shortcut.ps1`
+  - macOS: `bash scripts/make-shortcut.sh`
+- Or double-click `start-demo.bat` (Windows) or `start-demo.command` (Mac), or run `npm install` then `npm run demo`.
+- To stop the demo:
+  - Windows: close the minimized "Sahel agent demo" console window.
+  - macOS app: run `lsof -ti tcp:5318 | xargs kill`. With `start-demo.command`, press Ctrl+C in the Terminal window instead.
+- To rebuild the icons after a design change: `node scripts/make-icons.js`, then copy `assets/sahel.icns` into `mac/إيجنت سهل.app/Contents/Resources/`.
 - Open http://127.0.0.1:5318. On a phone on the same Wi-Fi, use the `Phone (same Wi-Fi)` address the server prints. Windows may ask to allow Node through the firewall: allow it on Private networks.
 - In the page, tap ☰ → pick a provider → "اختبار الاتصال" (Test connection). Claude Code CLI is the default.
 
@@ -40,6 +49,25 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
 3. Set `path_verified: true` only when the category and service names were checked against the real app, for example from a screenshot.
 4. To add a new agency's services, set `covered: true` on that agency and add its records. The page and the agent pick them up on reload; no code change is needed.
 5. Run `npm test` and `npm run test:questions`.
+
+## Windows / macOS readiness (tested 2026-10-26 on Windows 11)
+- **Tested on Windows:**
+  - unit tests (17)
+  - Playwright smoke tests (3)
+  - `make-shortcut.ps1`: creates `إيجنت سهل.lnk` with the correct target, working directory, minimized window and icon
+  - `Start-Process` on the shortcut: started the server in 1.4 s, returned HTTP 200, and Edge opened the page titled «نموذج إيجنت سهل — تجريبي»
+  - a second launch: opened the browser and started no second server
+  - Test connection (Claude CLI) on that server: ok
+- **NOT tested on macOS** (no Mac available here):
+  1. Double-clicking `mac/إيجنت سهل.app` or the Desktop copy: does Finder show the icon, does it run, does the browser open?
+  2. Whether Gatekeeper blocks the unsigned bundle after a `git clone` (expected: no quarantine, so no prompt).
+  3. `scripts/make-shortcut.sh`: `ditto` copy, `project-path`, `xattr`, and whether the icon refreshes on the Desktop.
+  4. Whether `sahel.icns` is accepted by Finder or the Dock. Its structure was checked here (`file` reports a Mac OS X icon), but it was never displayed.
+  5. The PATH recovery in the app (login-shell PATH, Homebrew, nvm), and finding `claude` from a Finder-launched app.
+  6. Spawning `claude -p` on macOS without a shell, and `lsof`-based port detection.
+  7. `start-demo.command`: the executable bit after clone, and the Terminal launch.
+  8. LAN-IP selection on a real Mac (`en0`/`en1`). Only the unit tests with sample macOS interface lists ran.
+  9. Whether git on macOS keeps the Arabic bundle name intact (`core.precomposeunicode` is on by default).
 
 ## Known limitations
 - No public URL. The demo runs only on the viewer's own computer, and phones on the same Wi-Fi.

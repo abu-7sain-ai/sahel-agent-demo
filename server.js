@@ -1,11 +1,11 @@
 // Local demo server: serves the page, the knowledge base, and /api/chat. No login, no cookies, no IPs stored.
 const express = require('express');
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const { buildSystemPrompt, loadServices } = require('./lib/prompt');
 const { ask } = require('./lib/providers');
 const { redact } = require('./lib/redact');
+const { lanAddresses, openBrowser } = require('./lib/platform');
 
 const PORT = Number(process.env.PORT) || 5318;
 const LOG_DIR = path.join(__dirname, 'logs');
@@ -90,21 +90,24 @@ app.post('/api/test', async (req, res) => {
   }
 });
 
-function lanAddresses() {
-  return Object.values(os.networkInterfaces())
-    .flat()
-    .filter((i) => i && i.family === 'IPv4' && !i.internal)
-    .map((i) => i.address);
-}
-
 if (require.main === module) {
-  app.listen(PORT, '0.0.0.0', () => {
+  const url = `http://127.0.0.1:${PORT}`;
+  // Launchers set SAHEL_OPEN=1 so the browser opens only once the server is ready.
+  const open = process.env.SAHEL_OPEN === '1';
+  const server = app.listen(PORT, '0.0.0.0', () => {
     console.log('');
     console.log('  Sahel agent demo (independent demo — not the official app)');
-    console.log(`  Local:  http://127.0.0.1:${PORT}`);
+    console.log(`  Local:  ${url}`);
     for (const ip of lanAddresses()) console.log(`  Phone (same Wi-Fi):  http://${ip}:${PORT}`);
     console.log('');
     console.log('  Press Ctrl+C to stop.');
+    if (open) openBrowser(url);
+  });
+  server.on('error', (e) => {
+    if (e.code !== 'EADDRINUSE') throw e;
+    console.log(`  The demo is already running on ${url}`);
+    if (open) openBrowser(url);
+    process.exit(0);
   });
 }
 

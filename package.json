@@ -11,7 +11,7 @@
   "scripts": {
     "demo": "node server.js",
     "start": "node server.js",
-    "test": "node --test tests/unit/*.test.js",
+    "test": "node --test",
     "test:e2e": "playwright test",
     "test:questions": "node tests/run-questions.js"
   },

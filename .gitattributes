@@ -1,3 +1,10 @@
 * text=auto eol=lf
 *.bat text eol=crlf
+*.command text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=lf
+mac/**/Contents/MacOS/* text eol=lf
 *.ttf binary
+*.png binary
+*.ico binary
+*.icns binary
