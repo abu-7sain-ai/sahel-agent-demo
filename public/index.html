@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121212">
+<title>نموذج إيجنت سهل — تجريبي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Cairo Local'; src: url('fonts/Cairo.ttf') format('truetype'); font-weight: 200 1000; font-display: swap; }
+:root {
+  --bg: #121212; --row: #1C1C1E; --navy: #1B2A41; --divider: #2C2C2E;
+  --text: #FFFFFF; --muted: #8E8E93; --blue: #3B82F6; --red: #EF4444; --yellow: #F59E0B;
+  --pad: 16px; --t: 200ms;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: #6B6B70; font-family: 'Cairo', 'Cairo Local', system-ui, sans-serif; color: var(--text);
+  display: flex; align-items: center; justify-content: center; min-height: 100vh;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+input { font: inherit; }
+svg { display: block; }
+
+/* Phone frame on desktop, full screen on phones */
+.phone { width: 390px; height: 844px; border-radius: 54px; padding: 12px; background: #050505; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2a2a2a; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
+@media (max-width: 500px) {
+  body { display: block; background: var(--bg); }
+  .phone { width: 100%; height: 100dvh; border-radius: 0; padding: 0; box-shadow: none; background: var(--bg); }
+  .screen { border-radius: 0; }
+}
+
+.demo-bar { flex: none; background: var(--yellow); color: #1a1a1a; text-align: center; font-size: 13px; font-weight: 700; padding: 5px 8px; position: relative; z-index: 5; }
+.status { flex: none; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; font-size: 15px; font-weight: 700; direction: ltr; }
+.status .icons { display: flex; gap: 6px; align-items: center; }
+
+header.top { flex: none; display: flex; align-items: center; justify-content: space-between; padding: 4px var(--pad) 10px; }
+header.top h1 { margin: 0; font-size: 34px; font-weight: 700; line-height: 1.2; }
+header.top .actions { display: flex; gap: 18px; }
+header.top .actions button { width: 28px; height: 28px; display: grid; place-items: center; }
+
+.search { flex: none; margin: 0 var(--pad) 12px; height: 48px; border-radius: 10px; background: var(--row); display: flex; align-items: center; gap: 8px; padding: 0 12px; }
+.search input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: var(--text); font-size: 16px; }
+.search input::placeholder { color: var(--muted); font-weight: 300; font-style: italic; }
+
+.content { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 110px; }
+.content::-webkit-scrollbar { display: none; }
+
+.agency { display: flex; align-items: center; gap: 12px; height: 84px; padding: 0 var(--pad); background: var(--row); border-bottom: 1px solid var(--divider); width: 100%; text-align: right; }
+.logo { flex: none; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 24px; font-weight: 700; color: #fff; }
+.agency .name { flex: 1; font-size: 18px; font-weight: 500; line-height: 1.35; }
+.chev { flex: none; color: var(--muted); transition: transform var(--t); }
+.open > .agency .chev, .open > .category .chev { transform: rotate(180deg); }
+.panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t) ease; }
+.open > .panel { grid-template-rows: 1fr; }
+.panel > div { overflow: hidden; }
+.category { display: flex; align-items: center; height: 66px; padding: 0 var(--pad) 0 var(--pad); padding-right: 32px; width: 100%; text-align: right; background: var(--bg); border-bottom: 1px solid var(--divider); }
+.category .title { flex: 1; font-size: 17px; font-weight: 700; color: var(--blue); }
+.service { display: flex; align-items: center; gap: 10px; min-height: 80px; padding: 10px var(--pad); padding-right: 48px; width: 100%; text-align: right; background: var(--bg); border-bottom: 1px solid var(--divider); }
+.service .title { flex: 1; font-size: 17px; font-weight: 400; line-height: 1.4; }
+.service .sub { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+.empty-note { padding: 18px var(--pad) 18px 32px; color: var(--muted); font-size: 15px; background: var(--bg); border-bottom: 1px solid var(--divider); }
+
+/* Data tab */
+.profile { background: var(--navy); padding: 18px var(--pad) 20px; display: flex; align-items: center; gap: 14px; }
+.avatar { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.12); display: grid; place-items: center; }
+.profile .uname { font-size: 20px; font-weight: 700; }
+.profile .cid { color: #C7D2E4; font-size: 15px; direction: ltr; text-align: right; }
+.dots { display: flex; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.fields { padding: 8px var(--pad) 16px; background: var(--bg); border-bottom: 1px solid var(--divider); display: grid; gap: 10px; }
+.field label { display: block; color: var(--blue); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.field .val { background: var(--row); border-radius: 12px; padding: 10px 14px; font-size: 16px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.field .val.ltr span { direction: ltr; }
+.out-of-scope { height: 100%; display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 17px; padding: 40px; }
+
+/* Bottom nav */
+nav.bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 88px; background: rgba(18,18,18,.96); border-top: 1px solid var(--divider); display: flex; justify-content: space-around; padding: 8px 6px 22px; z-index: 6; }
+nav.bottom button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--muted); font-size: 12px; font-weight: 500; }
+nav.bottom button.active { color: var(--blue); }
+
+/* Agent button */
+.agent-btn { position: absolute; left: 16px; bottom: 108px; width: 60px; height: 60px; border-radius: 50%; background: var(--navy); border: 1.5px solid rgba(255,255,255,.35); display: grid; place-items: center; z-index: 7; box-shadow: 0 8px 24px rgba(0,0,0,.5); transition: transform var(--t); }
+.agent-btn:active { transform: scale(.94); }
+
+/* Chat drawer */
+.backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity var(--t); z-index: 8; }
+.drawer { position: absolute; left: 0; right: 0; bottom: 0; height: 85%; background: #17171A; border-radius: 22px 22px 0 0; z-index: 9; display: flex; flex-direction: column; transform: translateY(102%); transition: transform var(--t) ease-out; }
+.chat-open .backdrop { opacity: 1; pointer-events: auto; }
+.chat-open .drawer { transform: translateY(0); }
+.drawer-head { flex: none; display: flex; align-items: center; gap: 12px; padding: 14px var(--pad); border-bottom: 1px solid var(--divider); }
+.drawer-head .who { flex: 1; }
+.drawer-head .aname { font-size: 18px; font-weight: 700; }
+.drawer-head .asub { font-size: 13px; color: var(--muted); }
+.drawer-head button { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--row); }
+.msgs { flex: 1; overflow-y: auto; padding: 14px var(--pad); display: flex; flex-direction: column; gap: 10px; }
+.bubble { max-width: 85%; padding: 10px 14px; border-radius: 18px; font-size: 16px; font-weight: 400; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+.bubble.user { align-self: flex-start; background: var(--blue); border-bottom-right-radius: 6px; }
+.bubble.agent { align-self: flex-end; background: #2C2C2E; border-bottom-left-radius: 6px; }
+.bubble.error { align-self: flex-end; background: #3A1D1D; color: #FCA5A5; }
+.welcome { color: var(--muted); font-size: 15px; text-align: center; margin: 4px 0 6px; }
+.quick { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.quick button { background: var(--row); border: 1px solid var(--divider); border-radius: 18px; padding: 8px 14px; font-size: 15px; color: var(--blue); }
+.typing { align-self: flex-end; display: flex; gap: 4px; padding: 14px; background: #2C2C2E; border-radius: 18px; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: blink 1s infinite; }
+.typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+.composer { flex: none; display: flex; gap: 8px; padding: 10px var(--pad) 22px; border-top: 1px solid var(--divider); }
+.composer input { flex: 1; min-width: 0; height: 46px; border-radius: 23px; border: 1px solid var(--divider); background: var(--row); color: var(--text); padding: 0 16px; font-size: 16px; outline: none; }
+.composer button { width: 46px; height: 46px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; }
+.composer button:disabled { opacity: .5; }
+
+/* Settings sheet */
+.settings { position: absolute; inset: var(--bar, 29px) 0 0 0; background: var(--bg); z-index: 10; display: flex; flex-direction: column; transform: translateX(-102%); transition: transform var(--t) ease-out; }
+.settings-open .settings { transform: translateX(0); }
+.settings .body { flex: 1; overflow-y: auto; padding: 8px var(--pad) 24px; }
+.settings h2 { font-size: 17px; color: var(--blue); margin: 18px 0 8px; }
+.opt { display: flex; gap: 12px; align-items: flex-start; background: var(--row); border-bottom: 1px solid var(--divider); padding: 14px; cursor: pointer; }
+.opt:first-of-type { border-radius: 12px 12px 0 0; } .opt:last-of-type { border-radius: 0 0 12px 12px; border-bottom: 0; }
+.opt input { margin-top: 6px; accent-color: var(--blue); }
+.opt .t { font-weight: 700; direction: ltr; text-align: right; }
+.opt .d { color: var(--muted); font-size: 14px; }
+.settings .txt { width: 100%; height: 46px; border-radius: 10px; border: 1px solid var(--divider); background: var(--row); color: var(--text); padding: 0 12px; direction: ltr; outline: none; }
+.settings .hint { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+.btn { width: 100%; height: 48px; border-radius: 12px; background: var(--blue); font-weight: 700; font-size: 16px; margin-top: 18px; }
+.btn.ghost { background: var(--row); color: var(--red); }
+.result { margin-top: 12px; padding: 12px; border-radius: 10px; background: var(--row); font-size: 15px; display: none; }
+.result.ok { display: block; color: #4ADE80; } .result.bad { display: block; color: #FCA5A5; } .result.wait { display: block; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="phone">
+<div class="screen" id="screen">
+  <div class="demo-bar">نموذج تجريبي — ليس التطبيق الرسمي</div>
+  <div class="status">
+    <span id="clock">٩:٤١</span>
+    <span class="icons" aria-hidden="true">
+      <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#fff"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="#fff"/><rect x="10" y="3" width="3" height="9" rx="1" fill="#fff"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#fff"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M4 7a6 6 0 0 1 8 0"/><circle cx="8" cy="10" r="1" fill="#fff"/></svg>
+      <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="17" height="9" rx="2" fill="#fff"/><rect x="25" y="4.5" width="1.6" height="4" rx=".8" fill="#fff" opacity=".5"/></svg>
+    </span>
+  </div>
+  <header class="top">
+    <h1 id="title">خدمات</h1>
+    <div class="actions">
+      <button id="megaphone" aria-label="إعلانات"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.2v3.6c0 .5.4 1 1 1h2.2l6.3 3.9c.6.4 1.5-.1 1.5-.9V6.2c0-.8-.9-1.3-1.5-.9L7.2 9.2H5c-.6 0-1 .4-1 1z"/><path d="M7.5 15l1.3 4.3c.1.4.5.7.9.7h.9"/><path d="M18 9.3c.9.7 1.4 1.6 1.4 2.7s-.5 2-1.4 2.7"/></svg></button>
+      <button id="menu" aria-label="الإعدادات"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M4 6.5h16"/><path d="M4 12h16"/><path d="M4 17.5h16"/></svg></button>
+    </div>
+  </header>
+  <div class="search" id="searchBox">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+    <input id="search" type="search" placeholder="ابحث عن الخدمة" autocomplete="off" enterkeyhint="search">
+  </div>
+  <main class="content" id="content"></main>
+
+  <button class="agent-btn" id="agentBtn" aria-label="افتح سهّال">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5c0-1.9 1.6-3.5 3.5-3.5h9"/><path d="M26 15.5v2c0 1.9-1.6 3.5-3.5 3.5H14l-5.2 4.3c-.5.4-1.3.1-1.3-.6V21H9.5C7.6 21 6 19.4 6 17.5v-5"/><path d="M24.5 3.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z" fill="#fff" stroke-width="1.2"/></svg>
+  </button>
+
+  <nav class="bottom" id="nav">
+    <button data-tab="data"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8.3" r="3.8"/><path d="M4.8 20c.6-3.7 3.5-6 7.2-6s6.6 2.3 7.2 6"/></svg>بيانات</button>
+    <button data-tab="services" class="active"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7.5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2V8z"/><path d="M14 3.5V8h4.5"/><path d="M9 12.5h6M9 16h4"/></svg>خدمات</button>
+    <button data-tab="notifications"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 16.5V11a5.8 5.8 0 0 1 11.6 0v5.5l1.5 1.8H4.7z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg>إشعارات</button>
+    <button data-tab="appointments"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="3.6" r="1.4"/><circle cx="16.4" cy="5" r="1.4"/><circle cx="19" cy="8.8" r="1.4"/><circle cx="19" cy="13.2" r="1.4"/><circle cx="16.4" cy="17" r="1.4"/><circle cx="7.6" cy="5" r="1.4"/><circle cx="5" cy="8.8" r="1.4"/><circle cx="5" cy="13.2" r="1.4"/><circle cx="7.6" cy="17" r="1.4"/><path d="M12 18.3v3.2M10.5 21.5h3" stroke-linecap="round"/></svg>مواعيد</button>
+    <button data-tab="report"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5c0-1.1.9-2 2-2h2l1.5-2h5L16 6.5h2c1.1 0 2 .9 2 2V17c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2z"/><circle cx="12" cy="12.5" r="3.6"/></svg>بلّغ</button>
+  </nav>
+
+  <div class="backdrop" id="backdrop"></div>
+  <section class="drawer" id="drawer" aria-label="محادثة سهّال" role="dialog">
+    <div class="drawer-head">
+      <div class="logo" style="width:44px;height:44px;background:var(--navy);border:1.5px solid rgba(255,255,255,.35)"><svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5c0-1.9 1.6-3.5 3.5-3.5h9"/><path d="M26 15.5v2c0 1.9-1.6 3.5-3.5 3.5H14l-5.2 4.3c-.5.4-1.3.1-1.3-.6V21H9.5C7.6 21 6 19.4 6 17.5v-5"/><path d="M24.5 3.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z" fill="#fff" stroke-width="1.2"/></svg></div>
+      <div class="who"><div class="aname">سهّال</div><div class="asub">مساعدك في خدمات سهل</div></div>
+      <button id="closeChat" aria-label="إغلاق"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></button>
+    </div>
+    <div class="msgs" id="msgs">
+      <div class="welcome">اسألني عن أي خدمة في سهل بلهجتك، وأقولك وين تلقاها وشنو تحتاج.</div>
+      <div class="quick" id="quick">
+        <button>تجديد البطاقة المدنية</button>
+        <button>استمرارية الزواج</button>
+        <button>دفع مخالفات المرور</button>
+        <button>تجديد الإقامة</button>
+      </div>
+    </div>
+    <form class="composer" id="composer" autocomplete="off">
+      <input id="chatInput" placeholder="اكتب سؤالك هنا…" enterkeyhint="send">
+      <button id="sendBtn" type="submit" aria-label="إرسال"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5"/><path d="M11 5.5 4.5 12l6.5 6.5"/></svg></button>
+    </form>
+  </section>
+
+  <section class="settings" id="settings" aria-label="الإعدادات" role="dialog">
+    <header class="top">
+      <h1>الإعدادات</h1>
+      <div class="actions"><button id="closeSettings" aria-label="رجوع"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></svg></button></div>
+    </header>
+    <div class="body">
+      <h2>طريقة اتصال سهّال</h2>
+      <div id="providerList">
+        <label class="opt"><input type="radio" name="provider" value="claude-cli"><div><div class="t">Claude Code CLI</div><div class="d">يستخدم اشتراكك في Claude على هالجهاز. ما يحتاج مفتاح.</div></div></label>
+        <label class="opt"><input type="radio" name="provider" value="codex-cli"><div><div class="t">Codex CLI</div><div class="d">يستخدم اشتراكك في ChatGPT عن طريق Codex على هالجهاز.</div></div></label>
+        <label class="opt"><input type="radio" name="provider" value="anthropic"><div><div class="t">Anthropic API key</div><div class="d">مفتاح API من Anthropic، ينحفظ في هالمتصفح بس.</div></div></label>
+        <label class="opt"><input type="radio" name="provider" value="openai"><div><div class="t">OpenAI API key</div><div class="d">مفتاح API من OpenAI، ينحفظ في هالمتصفح بس.</div></div></label>
+      </div>
+      <div id="keyBlock" hidden>
+        <h2>مفتاح API</h2>
+        <input class="txt" id="apiKey" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false">
+        <p class="hint">المفتاح يبقى في هالمتصفح فقط، ويوصل للسيرفر المحلي مع كل سؤال بدون ما ينحفظ.</p>
+        <div id="openaiModelBlock" hidden>
+          <h2>موديل OpenAI</h2>
+          <input class="txt" id="openaiModel" placeholder="gpt-4.1-mini" spellcheck="false">
+        </div>
+      </div>
+      <button class="btn" id="testBtn">اختبار الاتصال</button>
+      <div class="result" id="testResult"></div>
+      <button class="btn ghost" id="clearBtn">مسح المحادثة والمفتاح</button>
+      <p class="hint" style="margin-top:18px">هذا نموذج تجريبي مستقل يحاكي شكل تطبيق سهل. ما يرتبط بأي نظام حكومي، وما يسوي أي معاملة حقيقية.</p>
+    </div>
+  </section>
+</div>
+</div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const screen = $('#screen');
+  const content = $('#content');
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('sahel.' + k); return v === null ? d : v; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('sahel.' + k, v); } catch {} },
+    del(k) { try { localStorage.removeItem('sahel.' + k); } catch {} },
+  };
+
+  // ---------- helpers ----------
+  const AR = '٠١٢٣٤٥٦٧٨٩';
+  const toArabicDigits = (s) => String(s).replace(/\d/g, (d) => AR[d]);
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  const CHEV_DOWN = '<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>';
+  const CHEV_LEFT = '<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6l-6 6 6 6"/></svg>';
+  // First letter of the agency's distinctive word (skips generic words like وزارة / الهيئة العامة).
+  const GENERIC = new Set(['وزارة', 'الهيئة', 'المؤسسة', 'الإدارة', 'الأمانة', 'الديوان', 'المركز', 'العامة', 'العام', 'الوطني', 'ديوان', 'قوة']);
+  function firstLetter(name) {
+    const words = name.replace(/[ًٌٍَُِّْـ]/g, '').split(/\s+/);
+    const word = (words.find((w) => !GENERIC.has(w)) || words[0]).replace(/^(لل|ال|ل(?=ش))/, '');
+    const m = word.match(/[ء-ي]/);
+    return m ? m[0] : '•';
+  }
+  function colorFor(i) { return `hsl(${Math.round((i * 137.508) % 360)}, 55%, 42%)`; }
+
+  // ---------- clock ----------
+  function tick() {
+    const d = new Date();
+    let h = d.getHours() % 12 || 12;
+    $('#clock').textContent = toArabicDigits(`${h}:${String(d.getMinutes()).padStart(2, '0')}`);
+  }
+  tick(); setInterval(tick, 15000);
+  screen.style.setProperty('--bar', document.querySelector('.demo-bar').offsetHeight + 'px');
+
+  // ---------- data ----------
+  let KB = { agencies: [], services: [] };
+  const byAgency = new Map();
+
+  async function loadKB() {
+    try {
+      const res = await fetch('/api/services');
+      KB = await res.json();
+    } catch {
+      content.textContent = '';
+      content.append(el('div', 'out-of-scope', 'تعذر تحميل قائمة الخدمات. تأكد إن السيرفر شغال.'));
+      return;
+    }
+    for (const a of KB.agencies) byAgency.set(a.name, new Map());
+    for (const s of KB.services) {
+      const cats = byAgency.get(s.agency);
+      if (!cats) continue;
+      if (!cats.has(s.category)) cats.set(s.category, []);
+      cats.get(s.category).push(s);
+    }
+    render();
+  }
+
+  // ---------- services tab ----------
+  function serviceRow(s, withSub) {
+    const b = el('button', 'service');
+    const t = el('span', 'title', s.name);
+    if (withSub) t.append(el('span', 'sub', `${s.agency} ← ${s.category}`));
+    b.append(t);
+    b.insertAdjacentHTML('beforeend', CHEV_LEFT);
+    b.addEventListener('click', () => askAbout(s.name));
+    return b;
+  }
+
+  function agencyRow(a, i) {
+    const wrap = el('div', 'agency-wrap');
+    const head = el('button', 'agency');
+    const logo = el('div', 'logo', firstLetter(a.name));
+    logo.style.background = colorFor(i);
+    head.append(logo, el('span', 'name', a.name));
+    head.insertAdjacentHTML('beforeend', CHEV_DOWN);
+    head.setAttribute('aria-expanded', 'false');
+    const panel = el('div', 'panel');
+    const inner = el('div');
+    panel.append(inner);
+    let built = false;
+    head.addEventListener('click', () => {
+      if (!built) { buildAgencyPanel(inner, a); built = true; }
+      const open = wrap.classList.toggle('open');
+      head.setAttribute('aria-expanded', String(open));
+    });
+    wrap.append(head, panel);
+    return wrap;
+  }
+
+  function buildAgencyPanel(inner, a) {
+    const cats = byAgency.get(a.name);
+    if (!cats || cats.size === 0) {
+      inner.append(el('div', 'empty-note', 'هالجهة موجودة في سهل بس لسا ما انضافت للنموذج التجريبي'));
+      return;
+    }
+    for (const [cat, list] of cats) {
+      const cwrap = el('div', 'cat-wrap');
+      const ch = el('button', 'category');
+      ch.append(el('span', 'title', cat || 'خدمات'));
+      ch.insertAdjacentHTML('beforeend', CHEV_DOWN);
+      const cp = el('div', 'panel');
+      const ci = el('div');
+      list.forEach((s) => ci.append(serviceRow(s, false)));
+      cp.append(ci);
+      ch.addEventListener('click', () => cwrap.classList.toggle('open'));
+      cwrap.append(ch, cp);
+      inner.append(cwrap);
+    }
+  }
+
+  function norm(s) {
+    return String(s).toLowerCase()
+      .replace(/[ًٌٍَُِّْـ]/g, '').replace(/[إأآا]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي')
+      .replace(/\s+/g, ' ').trim();
+  }
+
+  function renderServices() {
+    content.textContent = '';
+    const q = norm($('#search').value);
+    if (!q) {
+      KB.agencies.forEach((a, i) => content.append(agencyRow(a, i)));
+      return;
+    }
+    const agencies = KB.agencies.map((a, i) => [a, i]).filter(([a]) => norm(a.name).includes(q));
+    const services = KB.services.filter((s) => [s.name, s.category, ...(s.aliases || [])].some((x) => norm(x).includes(q)));
+    agencies.forEach(([a, i]) => content.append(agencyRow(a, i)));
+    services.forEach((s) => content.append(serviceRow(s, true)));
+    if (!agencies.length && !services.length) {
+      const box = el('div', 'out-of-scope');
+      box.style.height = 'auto';
+      box.append(el('div', null, 'ما لقيت خدمة بهالاسم.'));
+      const b = el('button', null, 'اسأل سهّال عنها');
+      b.style.cssText = 'color:var(--blue);margin-top:10px;font-weight:700';
+      b.addEventListener('click', () => { openChat(); send($('#search').value); });
+      box.append(b);
+      content.append(box);
+    }
+  }
+  $('#search').addEventListener('input', renderServices);
+
+  // ---------- data tab (dummy values only) ----------
+  const DATA = [
+    { agency: 'الهيئة العامة للمعلومات المدنية', fields: [['الاسم', 'مواطن تجريبي'], ['الرقم المدني', '000000000000', 1], ['تاريخ انتهاء البطاقة', '2027-01-01', 1], ['فصيلة الدم', 'O+', 1], ['العنوان', 'منطقة تجريبية، قطعة 0، شارع 0، منزل 0']] },
+    { agency: 'وزارة الداخلية', alerts: true, fields: [['رقم الجواز', 'X00000000', 1], ['تاريخ انتهاء الجواز', '2026-12-01', 1, 'yellow'], ['رقم اللوحة', '00-00000', 1], ['مخالفات المرور', 'مخالفة واحدة غير مدفوعة', 0, 'red']] },
+    { agency: 'وزارة العدل', fields: [['الحالة الاجتماعية', 'متزوج'], ['الأبناء', 'عبدالله، نورة، فهد']] },
+    { agency: 'وزارة الصحة', fields: [['المركز الصحي', 'مركز صحي تجريبي'], ['شهادات الميلاد المسجلة', '3', 1]] },
+    { agency: 'وزارة الكهرباء والماء والطاقة المتجددة', fields: [['رقم الحساب', '0000000', 1], ['المستحق', '0.000 د.ك', 1]] },
+  ];
+  function renderData() {
+    content.textContent = '';
+    const p = el('div', 'profile');
+    const av = el('div', 'avatar');
+    av.innerHTML = '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8.3" r="3.8"/><path d="M4.8 20c.6-3.7 3.5-6 7.2-6s6.6 2.3 7.2 6"/></svg>';
+    const who = el('div');
+    who.append(el('div', 'uname', 'مواطن تجريبي'), el('div', 'cid', '000000000000'));
+    p.append(av, who);
+    content.append(p);
+    DATA.forEach((d) => {
+      const i = Math.max(0, KB.agencies.findIndex((a) => a.name === d.agency));
+      const wrap = el('div', 'agency-wrap');
+      const head = el('button', 'agency');
+      const logo = el('div', 'logo', firstLetter(d.agency));
+      logo.style.background = colorFor(i);
+      head.append(logo, el('span', 'name', d.agency));
+      if (d.alerts) {
+        const dots = el('span', 'dots');
+        const r = el('span', 'dot'); r.style.background = 'var(--red)';
+        const y = el('span', 'dot'); y.style.background = 'var(--yellow)';
+        dots.append(r, y); head.append(dots);
+      }
+      head.insertAdjacentHTML('beforeend', CHEV_DOWN);
+      const panel = el('div', 'panel');
+      const inner = el('div', 'fields');
+      d.fields.forEach(([label, value, ltr, alert]) => {
+        const f = el('div', 'field');
+        f.append(el('label', null, label));
+        const v = el('div', 'val' + (ltr ? ' ltr' : ''));
+        v.append(el('span', null, value));
+        if (alert) { const dot = el('span', 'dot'); dot.style.background = `var(--${alert})`; v.append(dot); }
+        f.append(v); inner.append(f);
+      });
+      const holder = el('div'); holder.append(inner); panel.append(holder);
+      head.addEventListener('click', () => wrap.classList.toggle('open'));
+      wrap.append(head, panel);
+      content.append(wrap);
+    });
+  }
+
+  // ---------- tabs ----------
+  let tab = 'services';
+  function render() {
+    $('#searchBox').hidden = tab !== 'services';
+    $('#title').textContent = { services: 'خدمات', data: 'بيانات', notifications: 'إشعارات', appointments: 'مواعيد', report: 'بلّغ' }[tab];
+    if (tab === 'services') return renderServices();
+    if (tab === 'data') return renderData();
+    content.textContent = '';
+    content.append(el('div', 'out-of-scope', 'هذا القسم خارج نطاق النموذج التجريبي'));
+  }
+  document.querySelectorAll('#nav button').forEach((b) => b.addEventListener('click', () => {
+    tab = b.dataset.tab;
+    document.querySelectorAll('#nav button').forEach((x) => x.classList.toggle('active', x === b));
+    content.scrollTop = 0;
+    render();
+  }));
+
+  // ---------- chat ----------
+  const history = [];
+  const msgs = $('#msgs');
+  let busy = false;
+
+  function openChat() { screen.classList.add('chat-open'); setTimeout(() => $('#chatInput').focus({ preventScroll: true }), 220); }
+  function closeChat() { screen.classList.remove('chat-open'); $('#chatInput').blur(); }
+  $('#agentBtn').addEventListener('click', openChat);
+  $('#backdrop').addEventListener('click', closeChat);
+  $('#closeChat').addEventListener('click', closeChat);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeChat(); closeSettings(); } });
+
+  function bubble(text, who) {
+    const b = el('div', 'bubble ' + who, text);
+    msgs.append(b);
+    msgs.scrollTop = msgs.scrollHeight;
+    return b;
+  }
+
+  function settings() {
+    return { provider: store.get('provider', 'claude-cli'), apiKey: store.get('apiKey', ''), openaiModel: store.get('openaiModel', '') };
+  }
+
+  async function send(text) {
+    text = String(text || '').trim();
+    if (!text || busy) return;
+    busy = true;
+    $('#sendBtn').disabled = true;
+    $('#quick').hidden = true;
+    bubble(text, 'user');
+    history.push({ role: 'user', content: text });
+    const typing = el('div', 'typing'); typing.innerHTML = '<i></i><i></i><i></i>';
+    msgs.append(typing); msgs.scrollTop = msgs.scrollHeight;
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ messages: history.slice(-6), settings: settings() }),
+      });
+      const data = await res.json();
+      typing.remove();
+      if (data.ok) { bubble(data.reply, 'agent'); history.push({ role: 'assistant', content: data.reply }); }
+      else bubble(data.error || 'صار خطأ، جرّب مرة ثانية.', 'error');
+    } catch {
+      typing.remove();
+      bubble('ما قدرت أوصل للسيرفر. المساعد يحتاج السيرفر شغال والجهاز متصل.', 'error');
+    } finally {
+      busy = false;
+      $('#sendBtn').disabled = false;
+    }
+  }
+
+  function askAbout(serviceName) {
+    openChat();
+    send(`شلون أسوي ${serviceName}؟`);
+  }
+
+  $('#composer').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = $('#chatInput').value;
+    $('#chatInput').value = '';
+    send(v);
+  });
+  $('#quick').addEventListener('click', (e) => { if (e.target.tagName === 'BUTTON') send(e.target.textContent); });
+
+  // ---------- settings ----------
+  function openSettings() { screen.classList.add('settings-open'); syncSettingsUI(); }
+  function closeSettings() { screen.classList.remove('settings-open'); }
+  $('#menu').addEventListener('click', openSettings);
+  $('#closeSettings').addEventListener('click', closeSettings);
+
+  function syncSettingsUI() {
+    const s = settings();
+    document.querySelectorAll('input[name=provider]').forEach((r) => { r.checked = r.value === s.provider; });
+    const needsKey = s.provider === 'anthropic' || s.provider === 'openai';
+    $('#keyBlock').hidden = !needsKey;
+    $('#openaiModelBlock').hidden = s.provider !== 'openai';
+    $('#apiKey').value = s.apiKey;
+    $('#openaiModel').value = s.openaiModel;
+  }
+  document.querySelectorAll('input[name=provider]').forEach((r) => r.addEventListener('change', () => {
+    store.set('provider', r.value); $('#testResult').className = 'result'; syncSettingsUI();
+  }));
+  $('#apiKey').addEventListener('input', (e) => store.set('apiKey', e.target.value.trim()));
+  $('#openaiModel').addEventListener('input', (e) => store.set('openaiModel', e.target.value.trim()));
+
+  $('#testBtn').addEventListener('click', async () => {
+    const r = $('#testResult');
+    r.className = 'result wait'; r.textContent = 'جاري الاختبار…';
+    try {
+      const res = await fetch('/api/test', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ settings: settings() }) });
+      const data = await res.json();
+      if (data.ok) { r.className = 'result ok'; r.textContent = '✓ Connected — متصل'; }
+      else { r.className = 'result bad'; r.textContent = '✗ ' + (data.error || 'غير متصل') + (data.detail ? `\n(${data.detail})` : ''); }
+    } catch {
+      r.className = 'result bad'; r.textContent = '✗ السيرفر المحلي مو شغال.';
+    }
+  });
+  $('#clearBtn').addEventListener('click', () => {
+    store.del('apiKey'); history.length = 0;
+    msgs.querySelectorAll('.bubble, .typing').forEach((n) => n.remove());
+    $('#quick').hidden = false; syncSettingsUI();
+    const r = $('#testResult'); r.className = 'result ok'; r.textContent = 'انمسحت المحادثة والمفتاح.';
+  });
+
+  loadKB();
+})();
+</script>
+</body>
+</html>

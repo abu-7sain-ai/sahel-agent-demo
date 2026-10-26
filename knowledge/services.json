@@ -1,0 +1,2049 @@
+{
+  "version": "2026-10-26",
+  "note": "Demo knowledge base. PACI and MOI service names come from Sahel screenshots (path_verified: true). Other covered agencies were researched from official sources; their Sahel category names are not confirmed (path_verified: false). Empty fields mean no accepted source was found. Sources: knowledge/SOURCES.md.",
+  "agencies": [
+    {
+      "name": "تُواصل",
+      "covered": false
+    },
+    {
+      "name": "الأمانة العامة للأوقاف",
+      "covered": false
+    },
+    {
+      "name": "الإدارة العامة للجمارك",
+      "covered": false
+    },
+    {
+      "name": "الديوان الوطني لحقوق الإنسان",
+      "covered": false
+    },
+    {
+      "name": "المؤسسة العامة للتأمينات الاجتماعية",
+      "covered": false
+    },
+    {
+      "name": "المؤسسة العامة للرعاية السكنية",
+      "covered": false
+    },
+    {
+      "name": "المركز الوطني للأمن السيبراني",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة لشئون القصر",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة لشئون ذوي الإعاقة",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة للاتصالات وتقنية المعلومات",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة للبيئة",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة للتعليم التطبيقي والتدريب",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة للشباب والرياضة",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة للصناعة",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة للطيران المدني",
+      "covered": false
+    },
+    {
+      "name": "الهيئة العامة للقوى العاملة",
+      "covered": true
+    },
+    {
+      "name": "الهيئة العامة للمعلومات المدنية",
+      "covered": true
+    },
+    {
+      "name": "الهيئة العامة لمكافحة الفساد (نزاهة)",
+      "covered": false
+    },
+    {
+      "name": "بلدية الكويت",
+      "covered": false
+    },
+    {
+      "name": "بنك الائتمان الكويتي",
+      "covered": false
+    },
+    {
+      "name": "بيت الزكاة",
+      "covered": false
+    },
+    {
+      "name": "جامعة الكويت",
+      "covered": false
+    },
+    {
+      "name": "خدمات المسافرين",
+      "covered": false
+    },
+    {
+      "name": "ديوان الخدمة المدنية",
+      "covered": false
+    },
+    {
+      "name": "قوة الإطفاء العام",
+      "covered": false
+    },
+    {
+      "name": "وزارة الأشغال العامة",
+      "covered": false
+    },
+    {
+      "name": "وزارة الإعلام",
+      "covered": false
+    },
+    {
+      "name": "وزارة التجارة والصناعة",
+      "covered": false
+    },
+    {
+      "name": "وزارة التربية",
+      "covered": false
+    },
+    {
+      "name": "وزارة التعليم العالي",
+      "covered": false
+    },
+    {
+      "name": "وزارة الخارجية",
+      "covered": false
+    },
+    {
+      "name": "وزارة الداخلية",
+      "covered": true
+    },
+    {
+      "name": "وزارة الدفاع",
+      "covered": false
+    },
+    {
+      "name": "وزارة الشئون الإسلامية",
+      "covered": false
+    },
+    {
+      "name": "وزارة الشئون الاجتماعية",
+      "covered": false
+    },
+    {
+      "name": "وزارة الصحة",
+      "covered": true
+    },
+    {
+      "name": "وزارة العدل",
+      "covered": true
+    },
+    {
+      "name": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "covered": true
+    },
+    {
+      "name": "وزارة المالية",
+      "covered": false
+    },
+    {
+      "name": "وزارة المواصلات",
+      "covered": false
+    }
+  ],
+  "services": [
+    {
+      "name": "خدمة الاستعلام عن تغيب عامل",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1596861/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/5-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D8%AA%D9%82%D8%AF%D9%85%D9%87%D8%A7-%D8%A7%D9%84%D9%82%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "خدمة إصدار شهادة بيانات عامل",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1596861/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/5-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D8%AA%D9%82%D8%AF%D9%85%D9%87%D8%A7-%D8%A7%D9%84%D9%82%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "خدمة إصدار شهادة تسلسل تاريخي للعامل",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1596861/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/5-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D8%AA%D9%82%D8%AF%D9%85%D9%87%D8%A7-%D8%A7%D9%84%D9%82%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "خدمة أوامر الدفع",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1596861/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/5-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D8%AA%D9%82%D8%AF%D9%85%D9%87%D8%A7-%D8%A7%D9%84%D9%82%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "خدمة تحميل الشهادة",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1596861/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/5-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D8%AA%D9%82%D8%AF%D9%85%D9%87%D8%A7-%D8%A7%D9%84%D9%82%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "خدمة الاستعلام عن موعد جلسة لشكوى عمالية",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [],
+      "requirements": [
+        "أن يكون مسجلاً كعامل في القطاع الخاص (مواطن أو مقيم)",
+        "أن يكون قد تقدم بشكوى سابقة ضد الشركة التي يعمل بها"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1580037/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D9%82%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%AA%D8%B6%D9%8A%D9%81-%D8%AE%D8%AF%D9%85%D8%A9-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B9%D9%84%D8%A7%D9%85-%D8%B9%D9%86-%D9%85%D9%88%D8%B9%D8%AF-%D8%AC%D9%84%D8%B3%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D9%83%D8%A7%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D9%85%D8%A7%D9%84%D9%8A%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "تظلمات دعم العمالة الوطنية",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "دعم العمالة",
+      "aliases": [],
+      "requirements": [
+        "تعبئة الحقول المطلوبة وإرفاق المستند اللازم"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1356480",
+      "path_verified": false
+    },
+    {
+      "name": "كتب السجل العام",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "الخدمات العامة والاستعلام",
+      "aliases": [],
+      "requirements": [
+        "التسجيل عبر سهل أفراد",
+        "إدخال عنوان ووصف للكتاب أو المستند الخارجي"
+      ],
+      "documents": [
+        "مستند أو أكثر من المستندات/الكتب الصادرة عن جهات خارجية"
+      ],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1756748/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D9%82%D9%88%D9%89-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%AA%D8%B7%D9%84%D9%82-%D8%AE%D8%AF%D9%85%D8%A9-%D9%83%D8%AA%D8%A8-%D8%A7%D9%84%D8%B3%D8%AC%D9%84-%D8%A7%D9%84%D8%B9%D8%A7%D9%85-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "خدمات مكافأة الخريجين",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [
+        "استكمال مكافأة الخريجين",
+        "معاملة مكافأة الخريجين",
+        "المراجعة الدورية الآلية لمعاملة مكافأة الخريجين"
+      ],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1301748",
+      "path_verified": false
+    },
+    {
+      "name": "خدمة شهادة تدريبية لطلبة الصيف والربيع",
+      "agency": "الهيئة العامة للقوى العاملة",
+      "category": "خدمات العمالة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1301748",
+      "path_verified": false
+    },
+    {
+      "name": "إصدار شهادة جهة",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "الشهادات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إصدار شهادة فرد",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "الشهادات",
+      "aliases": [
+        "شهادة لمن يهمه الأمر",
+        "لمن يهمه الأمر"
+      ],
+      "requirements": [
+        "كويتي: يتم طباعتها من تطبيق سهل، وإذا تعذرت الطباعة تُراجَع مراكز الهيئة",
+        "حضور صاحب العلاقة أو من ينوب عنه بتوكيل رسمي من وزارة العدل (عند المراجعة)"
+      ],
+      "documents": [
+        "إثبات رسمي: البطاقة المدنية أو الجواز الأصلي أو الجنسية الأصلية أو رخصة القيادة",
+        "توكيل رسمي من وزارة العدل يجيز استلام الشهادة والبطاقة المدنية الأصلية في حال عدم حضور صاحب العلاقة"
+      ],
+      "fees": "غير كويتي (شهادة لمن يهمه الأمر، حضوريًا): 1 د.ك عن طريق كي نت. للكويتي: ما فيه مبلغ مذكور في المصدر.",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://services.paci.gov.kw/applications-guide/detail/previous-nationality-statement-certificate/39",
+      "path_verified": true
+    },
+    {
+      "name": "إضافة / تحديث صورة شخصية",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "استكمال بيانات مولود",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [
+        "تسجيل مولود",
+        "مولود جديد",
+        "رقم مدني للمولود"
+      ],
+      "requirements": [
+        "التسجيل عبر تطبيق سهل أو الخدمات الإلكترونية بموقع الهيئة",
+        "أن يكون المستند المرفق واضحاً",
+        "المهلة: 120 يوماً من الميلاد داخل الكويت؛ كويتي مولود بالخارج: شهر من الدخول؛ غير كويتي مولود بالخارج: 30 يوماً من تاريخ ختم الإقامة"
+      ],
+      "documents": [
+        "كويتي: شهادة الميلاد؛ شهادة إثبات الجنسية متوفر فيها فصيلة الدم",
+        "غير كويتي: جواز سفر ساري؛ شهادة الميلاد؛ فصيلة الدم؛ مستخرج ختم الإقامة؛ صورتان شخصيتان لمن أتم 5 سنوات"
+      ],
+      "fees": "5 د.ك رسوم خدمة (موقع الهيئة أو تطبيق سهل)؛ مخالفة 20 د.ك عند التأخر في التسجيل",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://services.paci.gov.kw/applications-guide/detail/newborn-registration/4",
+      "path_verified": true
+    },
+    {
+      "name": "تأكيد موافقة المالك",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحديث إسم عربي",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحديث اسم لاتيني لفرد كويتي",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحديث البريد الإلكتروني",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحديث رقم الهاتف",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحديث فصيلة الدم",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تسجيل إلتحاق بعائل أول مره مادة 22-26-27-29",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تسجيل عمالة منزلية أول مره مادة 20",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تسجيل وإعادة قيد مادة 17-18-19-21-23-24-25-28-30-31",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تعديل الوضع - المادة الثامنة",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تعديل وضع (المادة 7-كفالة شخصية)",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تغيير عنوان غير كويتي",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [
+        "تغيير العنوان للوافد",
+        "تغيير عنوان مقيم"
+      ],
+      "requirements": [
+        "يجب تغيير عنوان الأسرة كاملة",
+        "حضور صاحب العلاقة أو ولي الأمر أو من ينوب عنه بتوكيل رسمي من وزارة العدل، أو عبر تطبيق سهل",
+        "تعبئة إقرار السكن"
+      ],
+      "documents": [
+        "صورتان حديثتان مطابقتان للمواصفات لكل فرد بلغ 5 سنوات",
+        "مستأجر: عقد إيجار بالرقم الآلي للوحدة + وثيقة العقار أو فاتورة كهرباء (أقل من 6 أشهر إن كانت باسم المستأجر) أو شهادة السجل + إقرار موقع + صورة الجواز",
+        "حالات أخرى (عقار مرهون، سكن جهة العمل، وكيل/ممثل قانوني، الإقامة مع المستأجر، عقار ورثة، سكن شركة) لها مستندات إضافية بالصفحة"
+      ],
+      "fees": "5.250 د.ك (5 دنانير وربع) تدفع عن طريق موقع الهيئة أو تطبيق سهل",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://services.paci.gov.kw/applications-guide/detail/change-of-address-(non-kuwaiti)/16",
+      "path_verified": true
+    },
+    {
+      "name": "تغيير عنوان كويتي",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [
+        "تغيير العنوان",
+        "تحديث العنوان",
+        "نقل العنوان"
+      ],
+      "requirements": [
+        "يجب تغيير عنوان الأسرة كاملة",
+        "الحد الأقصى للتسجيل 4 أسر على 30 فرد",
+        "بصمة صاحب الحساب للسكن الملك/بيت الوالدين، وبصمة أحد الورثة لسكن الورثة، وبصمة المالك للإيجار",
+        "حالات الطلاق والترمل والإرث لها اشتراطات إضافية"
+      ],
+      "documents": [
+        "عبر سهل - سكن ملك: وثيقة البيت",
+        "عبر سهل - إيجار: عقد إيجار مستوفٍ (الرقم الآلي للعقار، أسماء الطرفين، العنوان الكامل، توقيع الطرفين) مع وثيقة البيت",
+        "حضورياً: البطاقات المدنية الأصلية لجميع أفراد الأسرة، صورتان حديثتان لمن بلغ 5 سنوات، وعقد الإيجار أو مستندات الملكية"
+      ],
+      "fees": "5.250 د.ك (5 دنانير وربع) تدفع عن طريق موقع الهيئة أو تطبيق سهل",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://services.paci.gov.kw/applications-guide/detail/change-address/6",
+      "path_verified": true
+    },
+    {
+      "name": "تفويض سكن",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "دفع الرسوم فرد / أسرة",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [
+        "دفع رسوم المعلومات المدنية"
+      ],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://services.paci.gov.kw/applications-guide/detail/-kuwaiti-card-renewal/1",
+      "path_verified": true
+    },
+    {
+      "name": "دمج رقم مدني",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "طلب الإطلاع على المعلومات",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الأفراد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "التجديد لفرد خليجي",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات البطاقة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "بدل فاقد",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات البطاقة",
+      "aliases": [
+        "ضاعت البطاقة",
+        "بطاقة مدنية ضايعة",
+        "بدل تالف"
+      ],
+      "requirements": [
+        "حضور صاحب العلاقة أو من ينوب عنه بتوكيل رسمي من وزارة العدل، أو التسجيل عبر تطبيق سهل",
+        "من هم دون 18 سنة بحضور ولي الأمر أو الحاضن (في حالات الطلاق)",
+        "كويتي: من بلغ 21 سنة فأكثر يحضر شخصياً؛ في حال فقدان جميع المستندات يلزم كتاب من الإدارة العامة للجنسية"
+      ],
+      "documents": [
+        "كويتي: إثبات رسمي ساري (الجنسية الأصلية أو الجواز أو رخصة القيادة أو تطبيق هويتي)؛ صورتان حديثتان لمن بلغ 5 سنوات؛ دون 5 سنوات: شهادة الميلاد الأصلية وصورة أو إثبات جنسية حديث؛ فوق 5 سنوات: الجواز الأصلي أو إثبات جنسية حديث",
+        "غير كويتي: الجواز الأصلي ساري المفعول وصورة عنه"
+      ],
+      "fees": "20 د.ك (تدفع عن طريق موقع الهيئة أو تطبيق سهل)",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://services.paci.gov.kw/applications-guide/detail/lost-card/21",
+      "path_verified": true
+    },
+    {
+      "name": "تجديد البطاقة",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات البطاقة",
+      "aliases": [
+        "تجديد البطاقة المدنية",
+        "البطاقة المدنية",
+        "تجديد المدنية"
+      ],
+      "requirements": [
+        "ألا يكون هناك طلب لتغيير الصورة الشخصية"
+      ],
+      "documents": [
+        "كويتي: الجنسية الأصلية وصورة عنها لمن بلغ 18 سنة؛ صورتان شخصيتان لمن بلغ 5 سنوات؛ صورة الجواز إن كان حديث الإصدار أو إثبات جنسية بصورة",
+        "غير كويتي: رقم مدني صحيح، جواز سفر ساري المفعول، مستخرج ختم الإقامة"
+      ],
+      "fees": "5 د.ك (تدفع عن طريق موقع الهيئة أو تطبيق سهل)؛ إعفاء ذوي الإعاقة المتوسطة والشديدة بإثبات من الهيئة العامة لشؤون ذوي الإعاقة (كويتي)؛ غير كويتي: مخالفة 20 د.ك عند التأخر (أكثر من 30 يوماً من تاريخ الإقامة للمواد 17/23/24 أو 60 يوماً من إذن العمل للمواد 18/19)",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://services.paci.gov.kw/applications-guide/detail/-kuwaiti-card-renewal/1",
+      "path_verified": true
+    },
+    {
+      "name": "توفر العنوان",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات البطاقة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إصدار رقم آلي لأرض فضاء",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إضافة جهة",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إضافة ديوانية على كويت فايندر",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إضافة مبنى",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إلغاء مبنى",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تعديل بيانات جهة",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تعديل بيانات مبنى",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "توفير خدمات المعلومات المكانيه و كويت فايندر",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "شطب الجهة",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "متابعة طلبات الجهات و العناوين",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمات الجهات والمباني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "شطب القاطنين",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمة بيانات القاطنين",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "طلب جديد",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمة بيانات القاطنين",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "عرض القاطنين",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمة بيانات القاطنين",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "متابعة الشكاوى",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "خدمة بيانات القاطنين",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "متابعة حالة المعاملات",
+      "agency": "الهيئة العامة للمعلومات المدنية",
+      "category": "متابعة الطلبات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "اصدار شهادة الحالة الجنائية",
+      "agency": "وزارة الداخلية",
+      "category": "الخدمات الأمنية",
+      "aliases": [
+        "صحيفة الحالة الجنائية",
+        "فيش وتشبيه",
+        "شهادة حسن سير وسلوك"
+      ],
+      "requirements": [
+        "تصدر حصرياً لمستحقيها وفق القانون رقم 9 لسنة 1971",
+        "وثيقة إلكترونية برمز QR للتحقق، تستخدم داخل الكويت وخارجها"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "صلاحية 6 أشهر",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1592364/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%AF%D8%A7%D8%AE%D9%84%D9%8A%D8%A9-%D8%AA%D9%81%D8%B9%D9%84-%D8%B4%D9%87%D8%A7%D8%AF%D8%A9-%D8%A7%D9%84%D8%AD%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D8%AC%D9%86%D8%A7%D8%A6%D9%8A%D8%A9-%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A7-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": true
+    },
+    {
+      "name": "الإبلاغ عن فقدان الوثائق",
+      "agency": "وزارة الداخلية",
+      "category": "الخدمات الأمنية",
+      "aliases": [
+        "ضاع جوازي",
+        "فقدان الجواز",
+        "بلاغ فقدان"
+      ],
+      "requirements": [
+        "للمقيمين: الإبلاغ عن فقدان جواز السفر وإصدار شهادة إثبات الفقدان إلكترونياً عبر قائمة الخدمات الأمنية في سهل"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1783589/%D8%A3%D8%AE%D9%8A%D8%B1%D8%A9/%D8%A7%D9%84%D8%AF%D8%A7%D8%AE%D9%84%D9%8A%D8%A9-%D8%AA%D8%AA%D9%8A%D8%AD-%D9%84%D9%84%D9%85%D9%82%D9%8A%D9%85%D9%8A%D9%86-%D8%A7%D9%84%D8%A5%D8%A8%D9%84%D8%A7%D8%BA-%D8%B9%D9%86-%D9%81%D9%82%D8%AF%D8%A7%D9%86-%D8%AC%D9%88%D8%A7%D8%B2%D8%A7%D8%AA-%D8%B3%D9%81%D8%B1%D9%87%D9%85-%D9%88%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%B4%D9%87%D8%A7%D8%AF%D8%A9-%D8%A5%D8%AB%D8%A8%D8%A7%D8%AA-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": true
+    },
+    {
+      "name": "التحقق من وجوب اجراء البصمة البيومترية",
+      "agency": "وزارة الداخلية",
+      "category": "الخدمات الأمنية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "متابعة قضايا الجنح",
+      "agency": "وزارة الداخلية",
+      "category": "الخدمات الأمنية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "الاستعلام عن طلب الالتحاق",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات أكاديمية سعد العبدالله",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تسجيل طلب إلتحاق",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات أكاديمية سعد العبدالله",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تعديل طلب الالتحاق",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات أكاديمية سعد العبدالله",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إصدار تقرير حركة الدخول والخروج",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات أمن المنافذ",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تسجيل بيانات إثبات ملكية الدرون",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الأنظمة الأمنية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "متابعة طلبات نقل ملكية الدرون",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الأنظمة الأمنية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "نقل ملكية الدرون",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الأنظمة الأمنية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إذن غياب خارج البلاد",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إصدار إقامة مؤقته",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "اصدار الإقامة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "الغاء إقامة العامل المنزلي المغادر",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تجديد الإقامة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [
+        "تجديد إقامة الخدامة",
+        "إقامة الخدامة",
+        "إقامة العمالة المنزلية",
+        "إقامة السايق",
+        "تجديد الإقامة مادة 20"
+      ],
+      "requirements": [
+        "عمالة منزلية (مادة 20): يقدم عبر تطبيق سهل (خدمات الإقامة) أو حضورياً",
+        "نموذج طلب الإقامة موقعاً من الكفيل"
+      ],
+      "documents": [
+        "نموذج طلب الإقامة المعد لذلك موقعاً من الكفيل",
+        "صورتان شخصيتان خلفية زرقاء 4×6",
+        "جواز سفر المكفول الأصلي وصورة عنه",
+        "البطاقة المدنية للكفيل وصورة عنها",
+        "شهادة الضمان الصحي"
+      ],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://e.gov.kw/sites/kgoenglish/Pages/Services/MOI/ResidenceDomesticWorkersArticle20.aspx",
+      "path_verified": true
+    },
+    {
+      "name": "تحديث بيانات جواز السفر للمقيم",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحويل إقامة العامل المنزلي من كفيل لآخر",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [
+        "نقل كفالة الخدامة",
+        "تحويل الخدامة"
+      ],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تقديم بلاغ ترك العمل للعمالة المنزلية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "شهادة إثبات ترخيص الإقامة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "نتيجة الفحص الطبي للمقيم",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "نقل وتجديد الإقامة المؤقتة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الإقامة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "الاستعلام عن إمكانية استقدام العامل المنزلي",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات التأشيرة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تأشيرة العمالة المنزلية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات التأشيرة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحميل التأشيرة الإلكترونية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات التأشيرة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "شهادة إخطار بالتصرف في شكوى",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات التحقيقات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إصدار شهادات إدارة الجنسية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الجنسية الكويتية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "شهادة إثبات جنسية للمتوفي",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الجنسية الكويتية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "دفع المستحقات المالية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الدفع الإلكتروني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "دفع تذاكر المبعدين",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الدفع الإلكتروني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "دفع رسوم العمالة المنزلية الإضافية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الدفع الإلكتروني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "دفع غرامات شئون الإقامة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الدفع الإلكتروني",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "دفع مخالفات المرور",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات الدفع الإلكتروني",
+      "aliases": [
+        "مخالفات المرور",
+        "المخالفات المرورية",
+        "دفع المخالفات"
+      ],
+      "requirements": [
+        "السداد فقط عبر القنوات الرسمية: تطبيق وزارة الداخلية وتطبيق سهل",
+        "الوزارة لا ترسل رسائل من أرقام دولية ولا تقدم خصومات؛ الإبلاغ عن الرسائل المشبوهة عبر خدمة أمان في سهل"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1295568",
+      "path_verified": true
+    },
+    {
+      "name": "طلب إصدار الشهادات",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المؤسسات الإصلاحية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "طلب زيارة النزيل",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المؤسسات الإصلاحية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تجديد رخصة المركبة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المرور",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحميل رخصة قيادة إلكترونية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المرور",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تحميل رخصة مركبة إلكترونية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المرور",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تفويض استخدام المركبة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المرور",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "خدمات رخص القيادة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المرور",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "مواعيد اختبار القيادة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المرور",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "نقل ملكية المركبة",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات المرور",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "اصدار شهادة براءة ذمة من تنفيذ الأحكام",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات تنفيذ الأحكام",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "الأحكام المقيدة لإنجاز الخدمات",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات تنفيذ الأحكام",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "إصدار وثيقة سفر إضطرارية إلكترونية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات جواز السفر الكويتي",
+      "aliases": [
+        "وثيقة سفر",
+        "جواز مؤقت",
+        "جواز ضايع وأبي أسافر"
+      ],
+      "requirements": [
+        "الطلب عبر خدمة المسافرين في تطبيق سهل",
+        "أُطلقت لمن تجاوز 16 عاماً (2023) ثم أُضيفت فئة القصر دون 16 عاماً (أبريل 2026)",
+        "استصدار الوثيقة يلغي جواز سفر المواطن بالتبعية"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "خلال دقائق؛ صلاحية الوثيقة 6 أشهر",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1197963",
+      "path_verified": true
+    },
+    {
+      "name": "تجديد جواز السفر الكويتي",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات جواز السفر الكويتي",
+      "aliases": [
+        "تجديد الجواز",
+        "رسوم الجواز"
+      ],
+      "requirements": [
+        "للمواطنين من عمر 21 سنة فأكثر (من هم دون 21 يجددون في مراكز الهوية الوطنية بحضور ولي الأمر)",
+        "تحديد مكان الاستلام وإدخال الرقم الآلي لعنوان السكن",
+        "اختيار مدة الصلاحية 5 أو 10 سنوات",
+        "مراجعة البيانات ودفع الرسوم إلكترونياً"
+      ],
+      "documents": [
+        "صورة شخصية حديثة وواضحة لم يمض على التقاطها أكثر من 6 أشهر ومطابقة للمواصفات (لا يعاد استخدام صورة الجواز السابق)"
+      ],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1781040/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%AE%D8%B7%D9%88%D8%A7%D8%AA-%D8%AA%D8%AC%D8%AF%D9%8A%D8%AF-%D8%AC%D9%88%D8%A7%D8%B2-%D8%A7%D9%84%D8%B3%D9%81%D8%B1-%D8%B9%D8%A8%D8%B1-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82-%D8%B3%D9%87%D9%84",
+      "path_verified": true
+    },
+    {
+      "name": "شهادة \"صورة طبق الاصل\" لجواز السفر الكويتي",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات جواز السفر الكويتي",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "دفع مخالفات القطع البحرية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات خفر السواحل",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "شهادة ملكية قطعة بحرية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات خفر السواحل",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "تقديم تعديل الوضع وإثبات الجدية",
+      "agency": "وزارة الداخلية",
+      "category": "خدمات شئون المادة الخامسة",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "",
+      "source_url": "",
+      "path_verified": true
+    },
+    {
+      "name": "الإجازات المرضية (طلب إجازة مرضية إلكترونية)",
+      "agency": "وزارة الصحة",
+      "category": "خدمة الإجازات المرضية",
+      "aliases": [],
+      "requirements": [
+        "الإجازة الإلكترونية ليوم واحد فقط",
+        "لا يجوز ثلاثة أيام متتالية",
+        "حد أقصى 3 مرات شهرياً و15 يوماً في السنة",
+        "بعد استنفاد الرصيد يلزم مراجعة المركز الصحي"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1700497/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D9%85%D8%B1%D8%B6%D9%8A%D8%A9-%D8%B3%D9%87%D9%84-%D8%AC%D9%87%D8%AF-%D8%A3%D9%82%D9%84-%D9%88%D8%A5%D9%86%D8%AA%D8%A7%D8%AC%D9%8A%D8%A9-%D8%A3%D9%83%D8%AB%D8%B1",
+      "path_verified": false
+    },
+    {
+      "name": "طلب إجازة الحمل 30 أسبوعا",
+      "agency": "وزارة الصحة",
+      "category": "خدمات المجلس الطبي العام",
+      "aliases": [],
+      "requirements": [
+        "للموظفة الكويتية التي بلغ حملها 30 أسبوعاً",
+        "شريطة استمرار الحمل"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1681523/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B5%D8%AD%D8%A9-%D8%A7%D9%84%D8%A5%D8%AC%D8%A7%D8%B2%D8%A9-%D8%A7%D9%84%D9%85%D8%B1%D8%B6%D9%8A%D8%A9-%D9%84%D9%84%D9%85%D9%88%D8%B8%D9%81%D8%A9-%D8%A7%D9%84%D8%AD%D8%A7%D9%85%D9%84-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "تقديم طلب العلاج بالخارج",
+      "agency": "وزارة الصحة",
+      "category": "العلاج بالخارج",
+      "aliases": [],
+      "requirements": [
+        "وجود زيارات وملف صحي فعّال في المستشفى المختص بالحالة",
+        "تقرير طبي حديث خلال آخر 3 أشهر من المستشفى الحكومي المختار",
+        "صحة البريد الإلكتروني ورقم الهاتف في سهل",
+        "الخدمة متاحة حالياً لمركز الكويت لمكافحة السرطان وتضاف مستشفيات تدريجياً (وقت النشر)"
+      ],
+      "documents": [
+        "تقرير طبي حديث (خلال 3 أشهر)"
+      ],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1637732/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B5%D8%AD%D8%A9-%D8%AA%D8%AA%D9%8A%D8%AD-%D8%AA%D9%82%D8%AF%D9%8A%D9%85-%D8%B7%D9%84%D8%A8-%D8%B9%D9%84%D8%A7%D8%AC-%D8%A8%D8%A7%D9%84%D8%AE%D8%A7%D8%B1%D8%AC-%D9%85%D8%A8%D8%A7%D8%B4%D8%B1%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "التحاليل المخبرية",
+      "agency": "وزارة الصحة",
+      "category": "السجل الصحي",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1638493/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A5%D8%AF%D8%B1%D8%A7%D8%AC-%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%AA%D8%AD%D8%A7%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%85%D8%AE%D8%AA%D8%A8%D8%B1%D8%A7%D8%AA-%D9%88%D8%AA%D9%82%D8%A7%D8%B1%D9%8A%D8%B1-%D8%A7%D9%84%D8%A7%D8%B4%D8%B9%D8%A9-%D9%81%D9%8A-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "تقارير الأشعة",
+      "agency": "وزارة الصحة",
+      "category": "السجل الصحي",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1638493/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A5%D8%AF%D8%B1%D8%A7%D8%AC-%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%AA%D8%AD%D8%A7%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%85%D8%AE%D8%AA%D8%A8%D8%B1%D8%A7%D8%AA-%D9%88%D8%AA%D9%82%D8%A7%D8%B1%D9%8A%D8%B1-%D8%A7%D9%84%D8%A7%D8%B4%D8%B9%D8%A9-%D9%81%D9%8A-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "حجز مواعيد الأطباء الزائرين",
+      "agency": "وزارة الصحة",
+      "category": "المواعيد",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1182472",
+      "path_verified": false
+    },
+    {
+      "name": "رحلة المولود - إصدار شهادة الميلاد",
+      "agency": "وزارة الصحة",
+      "category": "رحلة المولود",
+      "aliases": [
+        "شهادة ميلاد",
+        "شهادة الميلاد",
+        "تسجيل مولود",
+        "مولود جديد"
+      ],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1723948/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%AA%D8%B3%D8%B1%D9%8A%D8%B9-%D8%AA%D9%86%D9%81%D9%8A%D8%B0-%D8%A5%D8%B3%D8%AA%D8%B1%D8%A7%D8%AA%D9%8A%D8%AC%D9%8A%D8%A9-%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D8%A9-%D8%A7%D9%84%D8%B1%D9%82%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%B4%D8%A7%D9%85%D9%84%D8%A9",
+      "path_verified": false
+    },
+    {
+      "name": "شهادة إعلام رسمي (خلو زوجية - استمرارية زواج)",
+      "agency": "وزارة العدل",
+      "category": "التوثيقات الشرعية",
+      "aliases": [
+        "استمرارية زواج",
+        "شهادة استمرارية الزواج",
+        "استمرارية الزواج",
+        "خلو زوجية",
+        "شهادة خلو من الزوجية"
+      ],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1632866/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D8%AF%D8%B1%D8%AC-%D8%B4%D9%87%D8%A7%D8%AF%D8%AA%D9%8A-%D8%A5%D8%B9%D9%84%D8%A7%D9%85-%D8%B1%D8%B3%D9%85%D9%8A-%D8%AE%D9%84%D9%88-%D8%B2%D9%88%D8%AC%D9%8A%D8%A9--%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%D9%8A%D8%A9-%D8%B2%D9%88%D8%A7%D8%AC-%D9%88%D8%B9%D8%AF%D9%85-%D8%AD%D8%B5%D9%88%D9%84-%D8%A7%D8%B3%D8%AA%D8%A6%D9%86%D8%A7%D9%81-%D8%B9%D8%A8%D8%B1-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "شهادة عدم حصول استئناف",
+      "agency": "وزارة العدل",
+      "category": "خدمات المحاكم",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1175121",
+      "path_verified": false
+    },
+    {
+      "name": "طلب صورة من حكم ابتدائي",
+      "agency": "وزارة العدل",
+      "category": "خدمات المحاكم",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1209494",
+      "path_verified": false
+    },
+    {
+      "name": "إشعارات التوثيقات الشرعية (إشعار توثيق عقد الزواج / عقد الطلاق / المراجعة الزوجية / المخالعة)",
+      "agency": "وزارة العدل",
+      "category": "التوثيقات الشرعية",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1209494",
+      "path_verified": false
+    },
+    {
+      "name": "شهادة إيداع أجرة",
+      "agency": "وزارة العدل",
+      "category": "خدمات الشهادات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1713152/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D8%B7%D9%84%D9%82-4-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D9%84-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "شهادة بعدم إيداع أجرة",
+      "agency": "وزارة العدل",
+      "category": "خدمات الشهادات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1713152/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D8%B7%D9%84%D9%82-4-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D9%84-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "شهادة إيداع مفتاح العين المستأجرة",
+      "agency": "وزارة العدل",
+      "category": "خدمات الشهادات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1713152/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D8%B7%D9%84%D9%82-4-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D9%84-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "شهادة بعدم إيداع مفتاح العين المستأجرة",
+      "agency": "وزارة العدل",
+      "category": "خدمات الشهادات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1713152/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D8%B7%D9%84%D9%82-4-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D9%84-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "طلبات التنفيذ عن بعد",
+      "agency": "وزارة العدل",
+      "category": "طلبات التنفيذ عن بعد",
+      "aliases": [
+        "محضر استلام مبلغ خارج الإدارة",
+        "طلب فتح ملف بعد الإشكال",
+        "طلب صرف",
+        "طلب رفع إجراءات (التسوية-السداد)",
+        "طلب حجز مركبات",
+        "طلب حجز ما للمدين لدى الغير",
+        "طلب تعديل قيمة حكم",
+        "طلب حجز تحت يد الإدارة"
+      ],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1715909/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D9%82%D8%AF%D9%8A%D9%85-8-%D8%B7%D9%84%D8%A8%D8%A7%D8%AA-%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "طلب سفرة واحدة",
+      "agency": "وزارة العدل",
+      "category": "طلبات التنفيذ عن بعد",
+      "aliases": [],
+      "requirements": [
+        "للمدعى عليه الصادر بحقه أمر منع سفر"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1720223/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D8%B7%D9%84%D9%82-%D8%B7%D9%84%D8%A8-%D8%B3%D9%81%D8%B1%D8%A9-%D9%88%D8%A7%D8%AD%D8%AF%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "طلب إلغاء وكالة",
+      "agency": "وزارة العدل",
+      "category": "التوثيقات",
+      "aliases": [],
+      "requirements": [
+        "الصادر منه: إلغاء وكالة أو أكثر كلياً أو جزئياً",
+        "الصادر إليه: التنحي عن وكالة أو أكثر",
+        "زيارة موثق خارج الإدارة أو مراجعة أحد أفرع التوثيق لإتمام المعاملة"
+      ],
+      "documents": [],
+      "fees": "الرسوم المقررة تُحصّل عبر إشعارات دفع (إشعار لرسوم زيارة الموثق الخارجية إن وجدت، وإشعار لرسوم الإلغاء/التنحي) - المبلغ غير مذكور",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1727229/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AE%D8%AF%D9%85%D8%A9-%D8%B7%D9%84%D8%A8-%D8%A5%D9%84%D8%BA%D8%A7%D8%A1-%D9%88%D9%83%D8%A7%D9%84%D8%A9-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "تسديد أوامر منع السفر / تسديد إيجارات / تسديد غرامات جزائية",
+      "agency": "وزارة العدل",
+      "category": "خدمات الدفع",
+      "aliases": [
+        "منع سفر",
+        "رفع منع السفر"
+      ],
+      "requirements": [
+        "تُعرض القضايا المرتبطة بملف المستخدم والتي تتطلب السداد ويختار ما يريد تسديده"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1705559/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D8%B9%D8%AF%D9%84-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-3-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%AF%D9%81%D8%B9-%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    },
+    {
+      "name": "تسجيل عداد باسم عميل جديد",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "تحديث بيانات عميل",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "نقل ارتباط مياه",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "سداد تأمين عداد",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "إلغاء تسجيل عداد لمغادرة المرفق",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "إيصال مياه مؤقت",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "ترحيل معدات إنارة الشوارع",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "نقل كيبل وعداد الكهرباء",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "طلب قطع خدمة مياه",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات العدادات والتوصيلات",
+      "aliases": [],
+      "requirements": [],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1096789",
+      "path_verified": false
+    },
+    {
+      "name": "دفع فواتير استهلاك الغير",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "خدمات الدفع",
+      "aliases": [
+        "فاتورة الكهرباء",
+        "دفع فاتورة الكهرباء والماء"
+      ],
+      "requirements": [
+        "إدخال الرقم المدني لصاحب المرفق",
+        "إدخال رقم حساب صاحب المرفق لدى الوزارة",
+        "تحديد المبلغ المراد سداده والدفع"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alanba.com.kw/1127513",
+      "path_verified": false
+    },
+    {
+      "name": "حافز للترشيد",
+      "agency": "وزارة الكهرباء والماء والطاقة المتجددة",
+      "category": "الترشيد",
+      "aliases": [],
+      "requirements": [
+        "للعملاء المساهمين في ترشيد استهلاك الكهرباء والماء ومستخدمي الطاقة الكهروضوئية في السكن الخاص"
+      ],
+      "documents": [],
+      "fees": "",
+      "duration": "",
+      "last_verified": "2026-10-26",
+      "source_url": "https://www.alraimedia.com/article/1693246/%D9%85%D8%AD%D9%84%D9%8A%D8%A7%D8%AA/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D9%85%D8%AD%D9%84%D9%8A%D8%A9/%D8%A7%D9%84%D9%83%D9%87%D8%B1%D8%A8%D8%A7%D8%A1-%D8%AA%D8%AA%D9%8A%D8%AD-%D8%A7%D9%84%D8%A7%D9%86%D8%B6%D9%85%D8%A7%D9%85-%D9%84%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC-%D8%AD%D8%A7%D9%81%D8%B2-%D9%84%D9%84%D8%AA%D8%B1%D8%B4%D9%8A%D8%AF-%D8%B9%D8%A8%D8%B1-%D8%B3%D9%87%D9%84",
+      "path_verified": false
+    }
+  ]
+}
