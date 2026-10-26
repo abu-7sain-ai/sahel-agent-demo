@@ -140,3 +140,43 @@ Choices made where the constitution was silent or ambiguous. Phase 1 answers (A1
     - each state is scrolled so its anchor row sits at the same y as in the screenshot, with the clock frozen at 14:13
 
     Mean pixel difference per state went from 8.7–18.5 to 6.6–15.4. Most of what remains is the logos and the different (invented) values; see NOTES.md.
+
+## Eye-matching pass (2026-10-26)
+54. **Desktop fit.** The phone frame is scaled with a CSS `transform` so it is at most 92% of the window height (and 96% of the width), centred, and the page has no scroll. Phones keep full screen. It is checked by `tests/visual/desktop.js`: at 1366×768 the frame is 706 px (92.0%), at 1920×1080 it is 917 px (84.9%, natural size), and neither scrolls. The images are `tests/visual/desktop-*.png`.
+55. **Real logos stay on this machine.** `scripts/extract-logos.py` finds the round logo in each agency row of the services-list screenshots, at a fixed column, and numbers rows by their position from a known first agency. That way one missed circle can't shift the names. It also crops rows the scan missed at their expected place, cuts each logo with a round mask inset 5.5% to remove the dark edge and grey ring, and saves 90-px PNGs plus `logos.json` into `public/logos-local/`.
+    - It found 39 of 40. الهيئة العامة للبيئة is never fully on screen in any screenshot.
+    - The folder is git-ignored and was checked with `git check-ignore`.
+    - The page loads `logos-local/logos.json` if it exists and falls back to letter circles per logo.
+    - The committed renders (`tests/visual/*.png`, `desktop-*.png`) block that folder, so they show letter circles. Only the git-ignored composites use the real logos.
+56. **Font: stay with Noto Kufi Arabic, at lighter weights** (`assets/font-compare-2.png`, services-list crops only). Weights 200/300/400 of Noto Kufi and Cairo were scored against the same crops:
+    - Noto Kufi Arabic: 118.42
+    - Cairo: 130.12 (its best weights)
+
+    Noto Kufi at 300 matches the thin strokes of agency and service names by eye. So it can be made thin enough, and testing Tajawal, IBM Plex and Noto Naskh again wasn't needed (they scored worse at regular weight in item 45). The new weights:
+
+| Element | Before | Now (by eye against the screenshots) |
+|---|---|---|
+| Title «خدمات» / «بيانات» | 22.6px / 500 | 24.6px / 300 |
+| Agency name | 15.3px / 400 | 15.75px / 300 |
+| Service name | 14.8px / 400 | 15.6px / 300 |
+| Blue category title | 15.2px / 700 | 13.5px / 800 |
+| Search text and placeholder | 15.5px / 400 | 17px / 300 italic |
+| User name | 15.6px / 500 | 15.6px / 400 |
+| «طريقة العرض» | 14.2px / 400 | 14.2px / 300 |
+| Field label | 15.5px / 700 | 16.3px / 700 |
+| Value in box | 14.8px / 400 | 15.2px / 300 |
+| Bottom-nav label | 11.8px / 400 | 11px / 400, 2.5 px higher |
+| Clock | 13.5px / 600 | 13.5px / 400 |
+
+57. **Icons and details changed by eye:**
+    - The agency chevron is a 1.5-px stroke.
+    - The header list icon has three thin lines, right-aligned and shortening.
+    - The active «بيانات» person icon is 17% larger, as in the app.
+    - The prayer-beads icon is redrawn as two arcs of beads with a tassel.
+    - The home indicator is mid-grey.
+    - The avatar has a white 2.2-px ring.
+    - The search icon gap is 9.5 px.
+58. **Data header colours, as the screenshots show them:**
+    - The status bar turns navy as soon as you scroll.
+    - The profile and search block turns navy (with a navy-grey search field) only past 200 px, when the header hides and comes back (sahel_16, sahel_28).
+    - At a small scroll it stays page-coloured (sahel_03, sahel_04).

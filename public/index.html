@@ -17,19 +17,20 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
 html, body { margin: 0; height: 100%; }
-body { background: #6B6B70; font-family: 'Noto Kufi Arabic', system-ui, sans-serif; color: var(--text); display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+body { background: #6B6B70; font-family: 'Noto Kufi Arabic', system-ui, sans-serif; color: var(--text); display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
 input { font: inherit; }
 svg { display: block; }
 
 /* Phone frame on desktop; full screen on phones. The yellow demo bar sits above the 390×867 app area. */
-.phone { width: 414px; padding: 12px; border-radius: 48px; background: #050505; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2a2a2a; }
+/* Desktop: the frame is scaled (JS sets --fit) so it is at most 92% of the window height, never scrolls. */
+.phone { flex: none; transform: scale(var(--fit, 1)); transform-origin: center center; width: 414px; padding: 12px; border-radius: 48px; background: #050505; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2a2a2a; }
 .screen { position: relative; width: 390px; border-radius: 36px; overflow: hidden; background: var(--bg); }
 .demo-bar { background: var(--demo); color: #1a1a1a; text-align: center; font-size: 12px; font-weight: 700; line-height: 26px; height: 26px; }
 .app { position: relative; width: 390px; height: var(--app-h); overflow: hidden; background: var(--bg); }
 @media (max-width: 500px) {
-  body { display: block; background: var(--bg); }
-  .phone { width: 100%; padding: 0; border-radius: 0; box-shadow: none; background: var(--bg); }
+  body { display: block; background: var(--bg); height: auto; overflow: auto; }
+  .phone { transform: none; width: 100%; padding: 0; border-radius: 0; box-shadow: none; background: var(--bg); }
   .screen { width: 100%; border-radius: 0; }
   .app { width: 100%; height: calc(100dvh - 26px); }
 }
@@ -37,7 +38,7 @@ svg { display: block; }
 /* Status bar (Android): clock right, battery/signal left */
 .status { position: absolute; top: 0; left: 0; right: 0; height: 30px; z-index: 4; display: flex; align-items: center; justify-content: space-between; padding: 0 29px 0 28px; background: var(--bg); transition: background var(--t); }
 .app.data-stuck:not(.data-hidden) .status { background: var(--head); }
-.status .clock { font-size: 13.5px; font-weight: 600; letter-spacing: .2px; direction: ltr; }
+.status .clock { font-size: 13.5px; font-weight: 400; letter-spacing: .2px; direction: ltr; }
 .status .icons { display: flex; align-items: center; gap: 4px; direction: ltr; }
 .battery { width: 23px; height: 12px; border-radius: 6px; background: #8E8E93; color: #1C1C1E; font-size: 8.5px; font-weight: 700; line-height: 12px; text-align: center; }
 
@@ -46,21 +47,23 @@ svg { display: block; }
 .view::-webkit-scrollbar { display: none; }
 
 /* Header row: title right, list + megaphone icons left */
-.titlebar { height: 45px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px 0 13px; }
-.titlebar h1 { margin: 0; font-size: 22.6px; font-weight: 500; line-height: 1; transform: translateY(1px); }
+.titlebar { height: 45px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px 0 13px; }
+.titlebar h1 { margin: 0; font-size: 24.6px; font-weight: 300; line-height: 1; transform: translateY(1px); }
 .titlebar .icons { display: flex; align-items: center; gap: 27px; }
 .titlebar .icons button { display: grid; place-items: center; }
 
 /* Services tab */
 .svc-head { position: sticky; top: 0; z-index: 2; background: var(--bg); padding-bottom: 11.5px; }
-.search { display: flex; align-items: center; gap: 6px; height: 32.5px; border-radius: 9px; background: var(--field); padding: 0 6.5px 0 12px; }
+.search { display: flex; align-items: center; gap: 9.5px; height: 32.5px; border-radius: 9px; background: var(--field); padding: 0 6.5px 0 12px; }
 .svc-head .search { margin: 36px 26.4px 0; }
-.search input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: var(--text); font-size: 15.5px; font-weight: 400; padding: 0; }
-.search input::placeholder { color: var(--muted); font-style: italic; font-weight: 400; }
+.search input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: var(--text); font-size: 17px; font-weight: 400; padding: 0; }
+.search input::placeholder { color: var(--muted); font-style: italic; font-weight: 300; }
 
 .agency { display: flex; align-items: center; height: 57.9px; border-bottom: 1px solid var(--divider); width: 100%; padding: 0 8px 0 15px; }
 .logo { flex: none; width: 44.7px; height: 44.7px; border-radius: 50%; display: grid; place-items: center; font-size: 19px; font-weight: 700; color: #fff; order: 0; }
-.agency .name { flex: 1; font-size: 15.3px; font-weight: 400; line-height: 1.5; padding-right: 8px; white-space: nowrap; overflow: hidden; text-overflow: clip; }
+.logo.real { background: none; overflow: hidden; }
+.logo.real img { width: 100%; height: 100%; display: block; }
+.agency .name { flex: 1; font-size: 15.75px; font-weight: 300; line-height: 1.5; padding-right: 8px; white-space: nowrap; overflow: hidden; text-overflow: clip; }
 .agency .end { flex: none; display: flex; align-items: center; gap: 17px; direction: ltr; }
 .dot { width: 7.4px; height: 7.4px; border-radius: 50%; flex: none; }
 .dot.red { background: var(--red); } .dot.yellow { background: var(--yellow); }
@@ -70,8 +73,8 @@ svg { display: block; }
 .open > .panel { grid-template-rows: 1fr; }
 .panel > div { overflow: hidden; min-height: 0; }
 .cats { padding-bottom: 20px; border-bottom: 1px solid var(--divider); }
-.category { display: flex; align-items: center; width: 100%; height: 44.7px; padding: 0 31.8px 0 15px; }
-.category .title { flex: 1; font-size: 15.2px; font-weight: 700; color: var(--blue); line-height: 1.4; }
+.category { display: flex; align-items: center; width: 100%; height: 44.7px; padding: 0 30px 0 15px; }
+.category .title { flex: 1; font-size: 13.5px; font-weight: 800; color: var(--blue); line-height: 1.4; }
 .tri { color: #E8E8EA; transition: transform var(--t); }
 .open > .category .tri, .open > .sub .tri { transform: rotate(180deg); }
 .services { padding-bottom: 20px; }
@@ -79,25 +82,26 @@ svg { display: block; }
 .service > svg { margin-top: 4.6px; }
 .service::after { content: ''; position: absolute; left: 0; right: 31px; bottom: 0; height: 1px; background: var(--divider-soft); }
 .service:last-child::after { display: none; }
-.service .title { flex: 1; font-size: 14.8px; font-weight: 400; line-height: 1.5; }
+.service .title { flex: 1; font-size: 15.6px; font-weight: 300; line-height: 1.5; }
 .service .sub-line { display: block; font-size: 12px; color: var(--muted); }
 .empty-note { padding: 14px 31.8px 18px; color: var(--muted); font-size: 14px; border-bottom: 1px solid var(--divider); }
 
 /* Data tab */
 .data-head { position: sticky; top: -45px; z-index: 2; background: var(--bg); transition: background var(--t), transform var(--t); }
 .app.data-hidden .data-head { transform: translateY(-100%); }
-.app.data-stuck .data-head { background: var(--head); }
-.app.data-stuck .data-head .search { background: var(--head-field); }
+/* navy only once the header has hidden and come back (deep scroll), as in the app; the status bar turns navy as soon as you scroll */
+.app.data-float .data-head { background: var(--head); }
+.app.data-float .data-head .search { background: var(--head-field); }
 .profile { position: relative; height: 71px; margin-top: 14px; }
-.avatar { position: absolute; right: 21px; top: 0; width: 60.3px; height: 60.3px; border-radius: 50%; overflow: hidden; border: 1.5px solid #E9EDF3; background: #CFDCEB; }
+.avatar { position: absolute; right: 21px; top: 0; width: 60.3px; height: 60.3px; border-radius: 50%; overflow: hidden; border: 2.2px solid #FFFFFF; background: #CFDCEB; }
 .avatar img { width: 100%; height: 100%; display: block; }
-.uname { position: absolute; right: 102.6px; top: 4px; font-size: 15.6px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
+.uname { position: absolute; right: 102.6px; top: 4px; font-size: 15.6px; font-weight: 400; line-height: 1.6; white-space: nowrap; }
 .ucid { position: absolute; right: 102.3px; top: 33px; font-size: 12.6px; font-weight: 400; color: var(--id); line-height: 1.6; direction: ltr; }
 .refresh { position: absolute; left: 12px; top: 20px; }
 .data-head .search { margin: 0 11px 0 10.8px; height: 34px; border-radius: 10px; }
 .data-head .gap { height: 22px; }
 .viewmode { display: flex; align-items: center; justify-content: space-between; height: 51.5px; padding-top: 3px; padding: 0 13px 0 15px; border-bottom: 1px solid var(--divider); }
-.viewmode .label { color: var(--label); font-size: 14.2px; font-weight: 400; }
+.viewmode .label { color: var(--label); font-size: 14.2px; font-weight: 300; }
 .viewmode .icons { display: flex; align-items: center; gap: 6px; direction: ltr; }
 .viewmode button { display: grid; place-items: center; color: #474749; }
 .viewmode button.on { color: var(--label); }
@@ -109,10 +113,10 @@ svg { display: block; }
 .sub-wrap:last-child::after { display: none; }
 .sub .title { flex: 1; font-size: 15.75px; font-weight: 400; line-height: 1.5; white-space: pre; }
 .sub .end { display: flex; align-items: center; gap: 18px; direction: ltr; }
-.fields { padding: 5.5px 59.6px 15.5px 12.2px; }
-.flabel { color: var(--label); font-size: 15.5px; font-weight: 700; line-height: 1.5; margin: 0 0 8px; }
+.fields { padding: 3px 59.6px 15.5px 12.2px; }
+.flabel { color: var(--label); font-size: 16.3px; font-weight: 700; line-height: 1.5; margin: 0 0 8px; }
 .fbox { display: flex; align-items: center; justify-content: space-between; height: 34px; border: 1.4px solid var(--box-border); border-radius: 8px; padding: 0 8.8px 0 16px; margin-bottom: 8.7px; }
-.fbox .v { font-size: 14.8px; font-weight: 400; line-height: 1.3; white-space: pre-wrap; }
+.fbox .v { font-size: 15.2px; font-weight: 300; line-height: 1.3; white-space: pre-wrap; }
 .fbox .l { display: flex; align-items: center; gap: 19px; direction: ltr; }
 .more { display: flex; gap: 1.6px; }
 .more i { width: 4.6px; height: 4.6px; border-radius: 50%; background: #fff; }
@@ -121,14 +125,14 @@ svg { display: block; }
 
 /* Bottom nav */
 nav.bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 88px; background: var(--bg); display: grid; grid-template-columns: repeat(5, 1fr); direction: rtl; z-index: 5; }
-nav.bottom button { position: relative; display: flex; flex-direction: column; align-items: center; color: var(--nav-off); font-size: 11.8px; font-weight: 400; padding-top: 13px; }
+nav.bottom button { position: relative; display: flex; flex-direction: column; align-items: center; color: var(--nav-off); font-size: 11px; font-weight: 400; padding-top: 13px; }
 nav.bottom button .ic { height: 27px; display: grid; place-items: center; }
-nav.bottom button .lb { margin-top: 9.5px; line-height: 1.4; }
+nav.bottom button .lb { margin-top: 7px; line-height: 1.4; }
 nav.bottom button.active { color: var(--nav-on); }
 nav.bottom button.active .fill { fill: currentColor; }
 nav.bottom button.active .cut { stroke: var(--bg); }
 .badge { position: absolute; top: 6.5px; left: calc(50% - 29px); width: 17px; height: 17px; border-radius: 50%; background: var(--badge); color: #fff; font-size: 10.5px; font-weight: 700; line-height: 17px; text-align: center; }
-.home-ind { position: absolute; bottom: 7px; left: 50%; width: 136px; height: 3.5px; margin-left: -68px; border-radius: 2px; background: #C8C8CA; z-index: 6; pointer-events: none; }
+.home-ind { position: absolute; bottom: 7px; left: 50%; width: 136px; height: 4px; margin-left: -68px; border-radius: 2px; background: #7C7C80; z-index: 6; pointer-events: none; }
 
 /* Agent button: where the app's "?" button is (41 px, left 15.6, top 715) */
 .agent-btn { position: absolute; left: 15.6px; top: 715px; width: 41.3px; height: 41.3px; border-radius: 50%; background: var(--fab); display: grid; place-items: center; z-index: 7; box-shadow: 0 2px 8px rgba(0,0,0,.35); transition: transform var(--t); }
@@ -203,10 +207,10 @@ nav.bottom button.active .cut { stroke: var(--bg); }
     </button>
 
     <nav class="bottom" id="nav">
-      <button data-tab="data"><span class="badge" id="badge">4</span><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle class="fill" cx="12" cy="8" r="4.1"/><path class="fill" d="M4.2 20.6c0-3.6 3.5-6.2 7.8-6.2s7.8 2.6 7.8 6.2z"/></svg></span><span class="lb">بيانات</span></button>
+      <button data-tab="data"><span class="badge" id="badge">4</span><span class="ic"><svg width="31.5" height="31.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle class="fill" cx="12" cy="8" r="4.1"/><path class="fill" d="M4.2 20.6c0-3.6 3.5-6.2 7.8-6.2s7.8 2.6 7.8 6.2z"/></svg></span><span class="lb">بيانات</span></button>
       <button data-tab="services" class="active"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path class="fill" d="M6.5 2.8h7.2L18.6 7.7V20a1.2 1.2 0 0 1-1.2 1.2H6.5A1.2 1.2 0 0 1 5.3 20V4a1.2 1.2 0 0 1 1.2-1.2z"/><path class="cut" d="M8.5 11.2h7M8.5 14.2h7M8.5 17.2h7" stroke-linecap="round"/></svg></span><span class="lb">خدمات</span></button>
       <button data-tab="notifications"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.3 16.6v-5.3a5.7 5.7 0 0 1 11.4 0v5.3l1.6 1.9H4.7z"/><path d="M10 21a2.1 2.1 0 0 0 4 0"/><path d="M3.6 6.5A9 9 0 0 1 6 3.4M20.4 6.5A9 9 0 0 0 18 3.4"/></svg></span><span class="lb">إشعارات</span></button>
-      <button data-tab="appointments"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8.2" r="1.55"/><circle cx="8.4" cy="9.4" r="1.55"/><circle cx="15.6" cy="9.4" r="1.55"/><circle cx="5.6" cy="11.8" r="1.55"/><circle cx="18.4" cy="11.8" r="1.55"/><circle cx="3.8" cy="15" r="1.55"/><circle cx="20.2" cy="15" r="1.55"/><path d="M5.4 15.6h13.2M8 13.2l1.6 2.4M16 13.2l-1.6 2.4M12 10v5.6" stroke-linecap="round"/></svg></span><span class="lb">مواعيد</span></button>
+      <button data-tab="appointments"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.05"><g><circle cx="3.40" cy="15.40" r="1.25"/><circle cx="4.05" cy="12.72" r="1.25"/><circle cx="5.92" cy="10.45" r="1.25"/><circle cx="8.71" cy="8.93" r="1.25"/><circle cx="12.00" cy="8.40" r="1.25"/><circle cx="15.29" cy="8.93" r="1.25"/><circle cx="18.08" cy="10.45" r="1.25"/><circle cx="19.95" cy="12.72" r="1.25"/><circle cx="20.60" cy="15.40" r="1.25"/><circle cx="7.40" cy="15.40" r="1.05"/><circle cx="8.28" cy="13.23" r="1.05"/><circle cx="10.58" cy="11.88" r="1.05"/><circle cx="13.42" cy="11.88" r="1.05"/><circle cx="15.72" cy="13.23" r="1.05"/><circle cx="16.60" cy="15.40" r="1.05"/></g><path d="M3.4 15.8h17.2M10.4 15.8v2.6M12 15.8v3M13.6 15.8v2.6" stroke-linecap="round"/></svg></span><span class="lb">مواعيد</span></button>
       <button data-tab="report"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3.6 8.2c0-1 .8-1.8 1.8-1.8h2.4l1.5-2.2h5.4l1.5 2.2h2.4c1 0 1.8.8 1.8 1.8v10c0 1-.8 1.8-1.8 1.8H5.4c-1 0-1.8-.8-1.8-1.8z"/><circle cx="12" cy="12.8" r="3.6"/></svg></span><span class="lb">بلّغ</span></button>
     </nav>
     <div class="home-ind"></div>
@@ -281,7 +285,7 @@ nav.bottom button.active .cut { stroke: var(--bg); }
   const AR = '٠١٢٣٤٥٦٧٨٩';
   const toArabicDigits = (s) => String(s).replace(/\d/g, (d) => AR[d]);
   function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-  const CHEV = '<svg class="chev" width="11" height="7" viewBox="0 0 11 7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1.2 1.2 5.5 5.5 9.8 1.2"/></svg>';
+  const CHEV = '<svg class="chev" width="11" height="7" viewBox="0 0 11 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.2 1.2 5.5 5.5 9.8 1.2"/></svg>';
   const TRI = '<svg class="tri" width="10" height="5" viewBox="0 0 10 5"><path d="M0 0h10L5 5z" fill="currentColor"/></svg>';
   const CHEV_LEFT = '<svg width="8" height="13" viewBox="0 0 8 13" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 1.2 1.4 6.5l5.2 5.3"/></svg>';
   const MORE = '<span class="more"><i></i><i></i><i></i></span>';
@@ -294,13 +298,35 @@ nav.bottom button.active .cut { stroke: var(--bg); }
     return m ? m[0] : '•';
   }
   const colorFor = (i) => `hsl(${Math.round((i * 137.508) % 360)}, 52%, 42%)`;
+  // Real logos exist only in the local, git-ignored public/logos-local/ (scripts/extract-logos.py);
+  // without them (e.g. the GitHub copy) every agency gets a letter circle.
+  let LOGOS = {};
   function logo(name) {
+    if (LOGOS[name]) {
+      const l = el('div', 'logo real');
+      const img = el('img'); img.src = LOGOS[name]; img.alt = '';
+      img.onerror = () => { l.replaceWith(letterLogo(name)); };
+      l.append(img);
+      return l;
+    }
+    return letterLogo(name);
+  }
+  function letterLogo(name) {
     const i = Math.max(0, KB.agencies.findIndex((a) => a.name === name));
     const l = el('div', 'logo', firstLetter(name));
     l.style.background = colorFor(i);
     return l;
   }
   function dot(kind) { return kind ? el('span', 'dot ' + kind) : null; }
+
+  // ---------- fit the phone frame inside the window on desktop ----------
+  function fit() {
+    const phone = document.querySelector('.phone');
+    const s = window.innerWidth <= 500 ? 1 : Math.min(1, (window.innerHeight * 0.92) / phone.offsetHeight, (window.innerWidth * 0.96) / phone.offsetWidth);
+    phone.style.setProperty('--fit', s.toFixed(4));
+  }
+  fit();
+  window.addEventListener('resize', fit);
 
   // ---------- clock: 24 h, Eastern Arabic digits ----------
   function tick() {
@@ -318,6 +344,7 @@ nav.bottom button.active .cut { stroke: var(--bg); }
     try {
       const [kb, profile] = await Promise.all([fetch('/api/services').then((r) => r.json()), fetch('/api/profile').then((r) => r.json())]);
       KB = kb; PROFILE = profile;
+      LOGOS = await fetch('logos-local/logos.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
     } catch {
       view.textContent = '';
       view.append(el('div', 'out-of-scope', 'تعذر تحميل البيانات. تأكد إن السيرفر شغال.'));
@@ -340,7 +367,7 @@ nav.bottom button.active .cut { stroke: var(--bg); }
     t.append(el('h1', null, title));
     const icons = el('div', 'icons');
     const menu = el('button'); menu.setAttribute('aria-label', 'الإعدادات'); menu.id = 'menu';
-    menu.innerHTML = '<svg width="23" height="15" viewBox="0 0 23 15" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M1.2 1.3h20.6M5.5 7.5h16.3M10 13.7h11.8"/></svg>';
+    menu.innerHTML = '<svg width="23" height="15" viewBox="0 0 23 15" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M1.2 1.3h20.6M1.2 7.5h15.4M1.2 13.7h10"/></svg>';
     menu.addEventListener('click', openSettings);
     const mega = el('button'); mega.setAttribute('aria-label', 'إعلانات');
     mega.innerHTML = '<svg width="20" height="17" viewBox="0 0 20 17"><path d="M1 6.2v4.2c0 .5.4.9.9.9h1.6l5.6 3.8c.5.3 1.1 0 1.1-.6V2.1c0-.6-.6-.9-1.1-.6L3.5 5.3H1.9c-.5 0-.9.4-.9.9z" fill="#fff"/><path d="M3.6 11.3 5 15.4c.1.4.5.6.9.6h.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M14 8.3h4.6M13.4 4.3l3.6-2.6M13.4 12.3l3.6 2.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>';
@@ -552,7 +579,8 @@ nav.bottom button.active .cut { stroke: var(--bg); }
   view.addEventListener('scroll', () => {
     const top = view.scrollTop;
     const data = tab === 'data';
-    app.classList.toggle('data-stuck', data && top > 44);
+    app.classList.toggle('data-stuck', data && top > 30);
+    app.classList.toggle('data-float', data && top > 200);
     if (!data || top <= 200) app.classList.remove('data-hidden');
     else if (top > lastTop + 2) app.classList.add('data-hidden');
     else if (top < lastTop - 2) app.classList.remove('data-hidden');
@@ -562,7 +590,7 @@ nav.bottom button.active .cut { stroke: var(--bg); }
   // ---------- tabs ----------
   let tab = 'services';
   function render() {
-    app.classList.remove('data-stuck', 'data-hidden');
+    app.classList.remove('data-stuck', 'data-float', 'data-hidden');
     view.scrollTop = 0;
     if (tab === 'services') return renderServices();
     if (tab === 'data') return renderData();

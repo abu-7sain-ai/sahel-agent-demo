@@ -35,6 +35,8 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
 - To stop the demo:
   - Windows: close the minimized "Sahel agent demo" console window.
   - macOS app: run `lsof -ti tcp:5318 | xargs kill`. With `start-demo.command`, press Ctrl+C in the Terminal window instead.
+- **Real logos, this machine only:** run `python scripts/extract-logos.py` (it needs `screenshots/`). It writes `public/logos-local/` (git-ignored) and a contact sheet to check the mapping by eye. Without the folder, the page shows letter circles.
+- **Desktop fit:** `node tests/visual/desktop.js` checks that the frame fits at 1366×768 and 1920×1080 and saves `tests/visual/desktop-*.png`.
 - To rebuild the icons after a design change: `node scripts/make-icons.js`, then copy `assets/sahel.icns` into `mac/إيجنت سهل.app/Contents/Resources/`.
 - Open http://127.0.0.1:5318. On a phone on the same Wi-Fi, use the `Phone (same Wi-Fi)` address the server prints. Windows may ask to allow Node through the firewall: allow it on Private networks.
 - In the page, tap ☰ → pick a provider → "اختبار الاتصال" (Test connection). Claude Code CLI is the default.
@@ -58,27 +60,30 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
 
   | State | Mean difference |
   |---|---|
-  | services-top | 15.4 |
-  | PACI الشهادات | 8.3 |
-  | PACI خدمات الأفراد | 8.8 |
-  | PACI خدمات البطاقة | 6.6 |
-  | MOI categories | 7.8 |
-  | MOI الإقامة | 9.0 |
-  | data-top | 12.1 |
-  | PACI الأبناء | 10.1 |
-  | MOI الكفالات | 9.3 |
-  | Justice | 14.6 |
+  | services-top | 12.7 |
+  | PACI الشهادات | 6.8 |
+  | PACI خدمات الأفراد | 8.4 |
+  | PACI خدمات البطاقة | 5.9 |
+  | MOI categories | 6.8 |
+  | MOI الإقامة | 8.7 |
+  | data-top | 10.7 |
+  | PACI الأبناء | 9.4 |
+  | MOI الكفالات | 8.9 |
+  | Justice | 14.0 |
 
-- **Remaining differences:**
-  1. Agency logos are letter circles, not the official logos. This is on purpose and is the biggest remaining difference.
+  These numbers include the real logos and the invented values; judge the composites by eye.
+
+- **Remaining differences** (after the eye-matching pass of 2026-10-26; every composite was reviewed by eye):
+  1. **Logos.** Real logos show only on this machine: 39 of 40, cut by `scripts/extract-logos.py` into the git-ignored `public/logos-local/`. On GitHub and on viewers' machines they are letter circles. الهيئة العامة للبيئة is never fully on screen in any screenshot, so it is a letter circle here too.
   2. The yellow demo bar sits above the app, and the browser title is the demo title. Both on purpose.
-  3. Every value is invented (name, civil ID, numbers, avatar), so text widths and line breaks differ. For example, the Justice property record fits on one line here but wraps in the real app.
-  4. The status bar shows a neutral battery "٨٠" and live time. The real one showed a low red battery. The signal and 5G glyphs are hand-drawn approximations.
-  5. The bottom-nav and header icons are hand-drawn SVG look-alikes. The prayer-beads (مواعيد) and megaphone shapes are the furthest from the originals.
-  6. Text weight is very slightly heavier than the app in service rows. Row positions drift by about 1 px per 10 rows.
-  7. The Data header's slide back in is all-or-nothing here. The real app reveals it gradually as you scroll (sahel_28 caught it halfway).
-  8. The "طريقة العرض" toggle only switches which icon is highlighted; there is no second layout.
-  9. Agencies the screenshots never show expanded open to nothing in the Data tab.
+  3. Every value is invented: name, civil ID, numbers, children, avatar. So text lengths differ and, for example, the Justice property record fits on one line where the real one wraps.
+  4. The status bar shows battery "٨٠" and a hand-drawn signal and 5G glyph. The real one is the phone's own (a low red battery in the screenshots).
+  5. The icons are hand-drawn look-alikes. The prayer beads (مواعيد) and the megaphone are the furthest from the originals; the others match closely.
+  6. Blue category titles are about 5–8% narrower than the app's at the same height. Noto Kufi Black is the closest weight available.
+  7. Rows drift by about 1 px every 10 rows against the screenshots.
+  8. The Data header returns all at once when you scroll up. The real app slides it in with the scroll (sahel_28 caught it halfway).
+  9. The «طريقة العرض» toggle only switches which icon is highlighted; there is no second layout.
+  10. Agencies the screenshots never show expanded open to nothing in the Data tab.
 
 ## Windows / macOS readiness (tested 2026-10-26 on Windows 11)
 - **Tested on Windows:**

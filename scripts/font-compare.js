@@ -1,22 +1,28 @@
 // Compares candidate Arabic fonts against text crops from the Sahel services list (sahel_09).
 // For each line and font/weight, the size is fitted so the ink width matches the screenshot,
 // then the rendered line is scored against the crop (mean absolute luminance difference, lower = closer).
-// Writes assets/font-compare.png (services-list text crops only) and prints the scores.
-// Usage: node scripts/font-compare.js <folder with the candidate .ttf files>
+// Writes assets/<out.png> (default font-compare.png; services-list text crops only) and prints the scores.
+// Usage: node scripts/font-compare.js <folder with the candidate .ttf files> [out.png] [weights, e.g. 200,300,400] [families, comma-separated]
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('@playwright/test');
 
 const ROOT = path.join(__dirname, '..');
 const FONT_DIR = process.argv[2];
+const OUT_FILE = process.argv[3] || 'font-compare.png';
+const WEIGHTS = (process.argv[4] || '400,500,700').split(',').map(Number);
+const ONLY = process.argv[5] ? process.argv[5].split(',') : null;
 const SHOT = path.join(ROOT, 'screenshots', 'sahel_09.jpg');
 
-const FONTS = [
+const ALL_FONTS = [
   { family: 'Cairo', files: { 400: 'Cairo.ttf', 500: 'Cairo.ttf', 700: 'Cairo.ttf' } },
   { family: 'Tajawal', files: { 400: 'Tajawal-Regular.ttf', 500: 'Tajawal-Medium.ttf', 700: 'Tajawal-Bold.ttf' } },
   { family: 'IBM Plex Sans Arabic', files: { 400: 'IBMPlexSansArabic-Regular.ttf', 500: 'IBMPlexSansArabic-Medium.ttf', 700: 'IBMPlexSansArabic-Bold.ttf' } },
   { family: 'Noto Kufi Arabic', files: { 400: 'NotoKufiArabic%5Bwght%5D.ttf', 500: 'NotoKufiArabic%5Bwght%5D.ttf', 700: 'NotoKufiArabic%5Bwght%5D.ttf' } },
 ];
+const FONTS = ALL_FONTS.filter((f) => !ONLY || ONLY.includes(f.family));
+// Variable fonts cover every weight; static files only the weights they ship.
+const VARIABLE = (f) => /%5B|Cairo/.test(Object.values(f.files)[0]);
 
 // Menu text from the services list, with the ink boxes measured in sahel_09 (576-px screenshot pixels).
 const LINES = [
@@ -36,7 +42,7 @@ function faceCss() {
       if (seen.has(key)) continue;
       seen.add(key);
       const data = fs.readFileSync(path.join(FONT_DIR, decodeURIComponent(file) === file ? file : file)).toString('base64');
-      const range = file.includes('%5B') ? '100 900' : w;
+      const range = VARIABLE(f) ? '100 900' : w;
       out.push(`@font-face{font-family:'${f.family}';font-weight:${range};src:url(data:font/ttf;base64,${data});}`);
     }
   }
@@ -48,12 +54,12 @@ function faceCss() {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.setContent(`<style>${faceCss()}</style><canvas id=c></canvas><img id=shot src="data:image/jpeg;base64,${shot}">`);
-  await page.evaluate(async (fonts) => {
-    for (const f of fonts) for (const w of [400, 500, 700]) await document.fonts.load(`${w} 20px '${f.family}'`, 'عربي');
+  await page.evaluate(async ({ fonts, weights }) => {
+    for (const f of fonts) for (const w of weights) await document.fonts.load(`${w} 20px '${f.family}'`, 'عربي');
     await new Promise((r) => (document.getElementById('shot').complete ? r() : (document.getElementById('shot').onload = r)));
-  }, FONTS);
+  }, { fonts: FONTS, weights: WEIGHTS });
 
-  const results = await page.evaluate(({ fonts, lines }) => {
+  const results = await page.evaluate(({ fonts, lines, weights }) => {
     const img = document.getElementById('shot');
     const out = [];
     const lum = (d, i) => 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
@@ -68,7 +74,7 @@ function faceCss() {
       rc.drawImage(img, x0 - pad, y0 - pad, W, H, 0, 0, W, H);
       const refData = rc.getImageData(0, 0, W, H).data;
       for (const f of fonts) {
-        for (const w of [400, 500, 700]) {
+        for (const w of weights) {
           const c = document.createElement('canvas');
           c.width = W; c.height = H;
           const ctx = c.getContext('2d');
@@ -115,7 +121,7 @@ function faceCss() {
       out.push({ line: line.id, ref: ref.toDataURL() });
     }
     return out;
-  }, { fonts: FONTS, lines: LINES });
+  }, { fonts: FONTS, lines: LINES, weights: WEIGHTS });
 
   // Summary: best weight per font per line, and total per font.
   const totals = {};
@@ -138,7 +144,8 @@ function faceCss() {
     <tr><td></td><td>total</td>${FONTS.map((f) => `<td><b>${totals[f.family].toFixed(2)}</b></td>`).join('')}</tr></table></body>`;
   const p2 = await browser.newPage({ deviceScaleFactor: 1 });
   await p2.setContent(html);
-  await p2.screenshot({ path: path.join(ROOT, 'assets', 'font-compare.png'), fullPage: true });
+  await p2.screenshot({ path: path.join(ROOT, 'assets', OUT_FILE), fullPage: true });
   await browser.close();
-  console.log('\nWrote assets/font-compare.png');
+  console.log(`
+Wrote assets/${OUT_FILE}`);
 })();

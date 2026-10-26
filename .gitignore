@@ -10,3 +10,4 @@ playwright-report/
 # Real Sahel screenshots contain personal data: never commit them or anything built from them
 screenshots/
 tests/visual/compare/
+public/logos-local/

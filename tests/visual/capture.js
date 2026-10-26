@@ -97,14 +97,22 @@ async function composite(browser, ours, shotFile, outFile, title) {
   const haveShots = fs.existsSync(SHOTS);
   if (haveShots) fs.mkdirSync(COMPARE, { recursive: true });
   const only = process.argv[2];
+  // Committed renders never show the local (git-ignored) logos cut from screenshots: block them there.
+  let blockLogos = true;
+  await page.route('**/logos-local/**', (route) => (blockLogos ? route.fulfill({ status: 404, body: '' }) : route.continue()));
   for (const state of STATES.filter((s) => !only || s.id === only)) {
+    blockLogos = true;
     await reach(page, state);
     const png = await page.locator('#app').screenshot();
     fs.writeFileSync(path.join(OUT, `${state.id}.png`), png);
     let line = `${state.id}: tests/visual/${state.id}.png`;
     if (haveShots) {
+      // the git-ignored composite uses the real local logos when they exist
+      blockLogos = false;
+      await reach(page, state);
+      const local = await page.locator('#app').screenshot();
       const shot = path.join(SHOTS, `sahel_${String(state.shot).padStart(2, '0')}.jpg`);
-      const score = await composite(browser, png, shot, path.join(COMPARE, `${state.id}.png`), state.id);
+      const score = await composite(browser, local, shot, path.join(COMPARE, `${state.id}.png`), state.id);
       line += ` · vs sahel_${String(state.shot).padStart(2, '0')} mean diff ${score.toFixed(1)}`;
     }
     console.log(line);
