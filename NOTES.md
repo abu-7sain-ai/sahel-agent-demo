@@ -24,6 +24,7 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
   - `lib/redact.js` removes civil IDs and passport numbers.
   - `lib/platform.js` handles Windows/macOS differences: CLI lookup, child PATH, Wi-Fi address, opening the browser.
 - **Launchers:** `assets/` holds the icons (png, ico, icns, svg), made by `scripts/make-icons.js`. `scripts/make-shortcut.ps1` creates the Windows Desktop shortcut. `mac/إيجنت سهل.app` is the macOS app, and `scripts/make-shortcut.sh` copies it to the Desktop.
+- **Sahel look (2026-10-26):** the page is rebuilt from measurements of 53 real Sahel screenshots. They live in `screenshots/`, which is git-ignored because they contain personal data. It uses the Noto Kufi Arabic font, the measured colours and sizes, and the Data tab structure with an invented citizen from `data/profile.json` and an illustrated avatar. Every measured value is in DECISIONS.md items 43–53.
 - **Knowledge:** `knowledge/services.json` has 40 agencies (6 covered) and 130 services. `knowledge/SOURCES.md` lists every source and what could not be confirmed. `knowledge/research-draft.json` keeps the raw research with full URLs and per-record notes.
 
 ## How to run
@@ -39,7 +40,8 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
 - In the page, tap ☰ → pick a provider → "اختبار الاتصال" (Test connection). Claude Code CLI is the default.
 
 ## Tests
-- `npm test` runs 13 unit tests: the knowledge base checks and the prompt builder, including the five-part format.
+- `npm test` runs 22 unit tests: the knowledge base, the prompt builder (including the five-part format), the platform helpers and the invented profile (it checks that no civil ID passes the check digit).
+- `npm run test:visual` renders 10 app states and, when `screenshots/` exists, compares them with the real screenshots.
 - `npm run test:e2e` runs the Playwright smoke tests (3) with a stubbed `/api/chat`. The first time, run `npx playwright install chromium`.
 - `npm run test:questions` runs the 10 acceptance questions through the real Claude CLI and rewrites `tests/questions.md`. Last run: 10/10 PASS. Each answer takes about 6–18 s.
 
@@ -49,6 +51,34 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
 3. Set `path_verified: true` only when the category and service names were checked against the real app, for example from a screenshot.
 4. To add a new agency's services, set `covered: true` on that agency and add its records. The page and the agent pick them up on reload; no code change is needed.
 5. Run `npm test` and `npm run test:questions`.
+
+## Visual match with the real app
+- Run `npm run test:visual`. It renders 10 states into `tests/visual/*.png` and, when `screenshots/` exists, builds [screenshot | demo | difference] composites in `tests/visual/compare/`, which is git-ignored.
+- Mean pixel difference per state, latest run:
+
+  | State | Mean difference |
+  |---|---|
+  | services-top | 15.4 |
+  | PACI الشهادات | 8.3 |
+  | PACI خدمات الأفراد | 8.8 |
+  | PACI خدمات البطاقة | 6.6 |
+  | MOI categories | 7.8 |
+  | MOI الإقامة | 9.0 |
+  | data-top | 12.1 |
+  | PACI الأبناء | 10.1 |
+  | MOI الكفالات | 9.3 |
+  | Justice | 14.6 |
+
+- **Remaining differences:**
+  1. Agency logos are letter circles, not the official logos. This is on purpose and is the biggest remaining difference.
+  2. The yellow demo bar sits above the app, and the browser title is the demo title. Both on purpose.
+  3. Every value is invented (name, civil ID, numbers, avatar), so text widths and line breaks differ. For example, the Justice property record fits on one line here but wraps in the real app.
+  4. The status bar shows a neutral battery "٨٠" and live time. The real one showed a low red battery. The signal and 5G glyphs are hand-drawn approximations.
+  5. The bottom-nav and header icons are hand-drawn SVG look-alikes. The prayer-beads (مواعيد) and megaphone shapes are the furthest from the originals.
+  6. Text weight is very slightly heavier than the app in service rows. Row positions drift by about 1 px per 10 rows.
+  7. The Data header's slide back in is all-or-nothing here. The real app reveals it gradually as you scroll (sahel_28 caught it halfway).
+  8. The "طريقة العرض" toggle only switches which icon is highlighted; there is no second layout.
+  9. Agencies the screenshots never show expanded open to nothing in the Data tab.
 
 ## Windows / macOS readiness (tested 2026-10-26 on Windows 11)
 - **Tested on Windows:**
@@ -82,5 +112,5 @@ Read this first in any new session. Source of truth: CONSTITUTION.md. Choices ma
 - Answers come from an LLM. The format is checked by tests, but wording varies from run to run.
 
 ## Pending / ideas
-- Get screenshots of the four researched agencies' menus in Sahel and set `path_verified: true`.
+- Get screenshots of the four researched agencies' menus in Sahel and set `path_verified: true`. The 53 screenshots from 2026-10-26 cover PACI and MOI only.
 - Write the Arabic presentation document for PACI (the fixed demo structure).

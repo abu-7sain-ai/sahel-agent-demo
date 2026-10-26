@@ -13,26 +13,30 @@ test('PACI → خدمات البطاقة → تجديد البطاقة opens the
   await expect(page.locator('.demo-bar')).toHaveText('نموذج تجريبي — ليس التطبيق الرسمي');
   await expect(page.locator('.agency').first()).toContainText('تُواصل');
 
-  await page.locator('.agency', { hasText: 'الهيئة العامة للمعلومات المدنية' }).click();
+  await page.locator('.agency', { hasText: 'الهيئة العامة للمعلومات المدنية' }).first().click();
   await page.locator('.category', { hasText: 'خدمات البطاقة' }).click();
   await page.locator('.service', { hasText: /^تجديد البطاقة$/ }).click();
 
-  await expect(page.locator('#screen')).toHaveClass(/chat-open/);
+  await expect(page.locator('#app')).toHaveClass(/chat-open/);
   await expect(page.locator('#drawer')).toBeInViewport();
   await expect(page.locator('.bubble.user').last()).toHaveText('شلون أسوي تجديد البطاقة؟');
   await expect(page.locator('.bubble.agent').last()).toHaveText('رد تجريبي');
   expect(sent.messages.at(-1)).toEqual({ role: 'user', content: 'شلون أسوي تجديد البطاقة؟' });
 });
 
-test('search filters live and the data tab shows dummy data only', async ({ page }) => {
+test('search filters live and the data tab shows the invented profile', async ({ page }) => {
   await page.goto('/');
   await page.fill('#search', 'مخالفات المرور');
   await expect(page.locator('.service', { hasText: 'دفع مخالفات المرور' })).toBeVisible();
   await page.click('nav button[data-tab=data]');
-  await expect(page.locator('.profile')).toContainText('مواطن تجريبي');
-  await expect(page.locator('.profile')).toContainText('000000000000');
+  await expect(page.locator('.profile')).toContainText('عبدالله محمد سالم الكويتي');
+  await expect(page.locator('.profile')).toContainText('288010100124');
+  await expect(page.locator('.viewmode')).toContainText('طريقة العرض');
+  await page.locator('.agency', { hasText: 'وزارة الداخلية' }).click();
+  await page.locator('.sub', { hasText: 'جواز السفر' }).first().click();
+  await expect(page.locator('.fbox', { hasText: 'P00123456' })).toBeVisible();
   await page.click('nav button[data-tab=report]');
-  await expect(page.locator('.content')).toHaveText('هذا القسم خارج نطاق النموذج التجريبي');
+  await expect(page.locator('#view')).toHaveText('هذا القسم خارج نطاق النموذج التجريبي');
 });
 
 test('no provider gives a clear Arabic message, not a crash', async ({ page }) => {

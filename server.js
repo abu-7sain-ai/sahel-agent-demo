@@ -63,6 +63,11 @@ app.get('/api/services', (req, res) => {
   res.json(loadServices());
 });
 
+// The invented citizen shown in the Data tab (all values are made up).
+app.get('/api/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, 'data', 'profile.json'));
+});
+
 app.post('/api/chat', async (req, res) => {
   const messages = cleanMessages(req.body && req.body.messages);
   const last = messages[messages.length - 1];

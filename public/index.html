@@ -3,133 +3,182 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#121212">
+<meta name="theme-color" content="#1C1C1E">
 <title>نموذج إيجنت سهل — تجريبي</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-@font-face { font-family: 'Cairo Local'; src: url('fonts/Cairo.ttf') format('truetype'); font-weight: 200 1000; font-display: swap; }
+/* Noto Kufi Arabic (OFL), local copy: works offline. Values below are measured from the Sahel screenshots (DECISIONS.md). */
+@font-face { font-family: 'Noto Kufi Arabic'; src: url('fonts/NotoKufiArabic.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
 :root {
-  --bg: #121212; --row: #1C1C1E; --navy: #1B2A41; --divider: #2C2C2E;
-  --text: #FFFFFF; --muted: #8E8E93; --blue: #3B82F6; --red: #EF4444; --yellow: #F59E0B;
-  --pad: 16px; --t: 200ms;
+  --bg: #1C1C1E; --field: #141414; --head: #1D232F; --head-field: #151922; --divider: #252527; --divider-soft: #232325;
+  --text: #FFFFFF; --muted: #ABABAE; --id: #D6DAE5; --blue: #3A7FE4; --label: #3D82EA; --nav-on: #3085FA; --nav-off: #D7D7D9;
+  --badge: #FE352E; --red: #F2140A; --yellow: #FBBA42; --box-border: #38383A; --fab: #19375B; --demo: #F59E0B;
+  --app-h: 866.67px; --t: 200ms;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
 html, body { margin: 0; height: 100%; }
-body {
-  background: #6B6B70; font-family: 'Cairo', 'Cairo Local', system-ui, sans-serif; color: var(--text);
-  display: flex; align-items: center; justify-content: center; min-height: 100vh;
-}
-button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+body { background: #6B6B70; font-family: 'Noto Kufi Arabic', system-ui, sans-serif; color: var(--text); display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
 input { font: inherit; }
 svg { display: block; }
 
-/* Phone frame on desktop, full screen on phones */
-.phone { width: 390px; height: 844px; border-radius: 54px; padding: 12px; background: #050505; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2a2a2a; }
-.screen { position: relative; width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
+/* Phone frame on desktop; full screen on phones. The yellow demo bar sits above the 390×867 app area. */
+.phone { width: 414px; padding: 12px; border-radius: 48px; background: #050505; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2a2a2a; }
+.screen { position: relative; width: 390px; border-radius: 36px; overflow: hidden; background: var(--bg); }
+.demo-bar { background: var(--demo); color: #1a1a1a; text-align: center; font-size: 12px; font-weight: 700; line-height: 26px; height: 26px; }
+.app { position: relative; width: 390px; height: var(--app-h); overflow: hidden; background: var(--bg); }
 @media (max-width: 500px) {
   body { display: block; background: var(--bg); }
-  .phone { width: 100%; height: 100dvh; border-radius: 0; padding: 0; box-shadow: none; background: var(--bg); }
-  .screen { border-radius: 0; }
+  .phone { width: 100%; padding: 0; border-radius: 0; box-shadow: none; background: var(--bg); }
+  .screen { width: 100%; border-radius: 0; }
+  .app { width: 100%; height: calc(100dvh - 26px); }
 }
 
-.demo-bar { flex: none; background: var(--yellow); color: #1a1a1a; text-align: center; font-size: 13px; font-weight: 700; padding: 5px 8px; position: relative; z-index: 5; }
-.status { flex: none; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; font-size: 15px; font-weight: 700; direction: ltr; }
-.status .icons { display: flex; gap: 6px; align-items: center; }
+/* Status bar (Android): clock right, battery/signal left */
+.status { position: absolute; top: 0; left: 0; right: 0; height: 30px; z-index: 4; display: flex; align-items: center; justify-content: space-between; padding: 0 29px 0 28px; background: var(--bg); transition: background var(--t); }
+.app.data-stuck:not(.data-hidden) .status { background: var(--head); }
+.status .clock { font-size: 13.5px; font-weight: 600; letter-spacing: .2px; direction: ltr; }
+.status .icons { display: flex; align-items: center; gap: 4px; direction: ltr; }
+.battery { width: 23px; height: 12px; border-radius: 6px; background: #8E8E93; color: #1C1C1E; font-size: 8.5px; font-weight: 700; line-height: 12px; text-align: center; }
 
-header.top { flex: none; display: flex; align-items: center; justify-content: space-between; padding: 4px var(--pad) 10px; }
-header.top h1 { margin: 0; font-size: 34px; font-weight: 700; line-height: 1.2; }
-header.top .actions { display: flex; gap: 18px; }
-header.top .actions button { width: 28px; height: 28px; display: grid; place-items: center; }
+/* Scroll area between status bar and bottom nav */
+.view { position: absolute; top: 30px; left: 0; right: 0; bottom: 88px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.view::-webkit-scrollbar { display: none; }
 
-.search { flex: none; margin: 0 var(--pad) 12px; height: 48px; border-radius: 10px; background: var(--row); display: flex; align-items: center; gap: 8px; padding: 0 12px; }
-.search input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: var(--text); font-size: 16px; }
-.search input::placeholder { color: var(--muted); font-weight: 300; font-style: italic; }
+/* Header row: title right, list + megaphone icons left */
+.titlebar { height: 45px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px 0 13px; }
+.titlebar h1 { margin: 0; font-size: 22.6px; font-weight: 500; line-height: 1; transform: translateY(1px); }
+.titlebar .icons { display: flex; align-items: center; gap: 27px; }
+.titlebar .icons button { display: grid; place-items: center; }
 
-.content { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 110px; }
-.content::-webkit-scrollbar { display: none; }
+/* Services tab */
+.svc-head { position: sticky; top: 0; z-index: 2; background: var(--bg); padding-bottom: 11.5px; }
+.search { display: flex; align-items: center; gap: 6px; height: 32.5px; border-radius: 9px; background: var(--field); padding: 0 6.5px 0 12px; }
+.svc-head .search { margin: 36px 26.4px 0; }
+.search input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: var(--text); font-size: 15.5px; font-weight: 400; padding: 0; }
+.search input::placeholder { color: var(--muted); font-style: italic; font-weight: 400; }
 
-.agency { display: flex; align-items: center; gap: 12px; height: 84px; padding: 0 var(--pad); background: var(--row); border-bottom: 1px solid var(--divider); width: 100%; text-align: right; }
-.logo { flex: none; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 24px; font-weight: 700; color: #fff; }
-.agency .name { flex: 1; font-size: 18px; font-weight: 500; line-height: 1.35; }
-.chev { flex: none; color: var(--muted); transition: transform var(--t); }
-.open > .agency .chev, .open > .category .chev { transform: rotate(180deg); }
+.agency { display: flex; align-items: center; height: 57.9px; border-bottom: 1px solid var(--divider); width: 100%; padding: 0 8px 0 15px; }
+.logo { flex: none; width: 44.7px; height: 44.7px; border-radius: 50%; display: grid; place-items: center; font-size: 19px; font-weight: 700; color: #fff; order: 0; }
+.agency .name { flex: 1; font-size: 15.3px; font-weight: 400; line-height: 1.5; padding-right: 8px; white-space: nowrap; overflow: hidden; text-overflow: clip; }
+.agency .end { flex: none; display: flex; align-items: center; gap: 17px; direction: ltr; }
+.dot { width: 7.4px; height: 7.4px; border-radius: 50%; flex: none; }
+.dot.red { background: var(--red); } .dot.yellow { background: var(--yellow); }
+.chev { color: #E8E8EA; transition: transform var(--t); }
+.open > .agency .chev, .open > .sub .chev { transform: rotate(180deg); }
 .panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t) ease; }
 .open > .panel { grid-template-rows: 1fr; }
-.panel > div { overflow: hidden; }
-.category { display: flex; align-items: center; height: 66px; padding: 0 var(--pad) 0 var(--pad); padding-right: 32px; width: 100%; text-align: right; background: var(--bg); border-bottom: 1px solid var(--divider); }
-.category .title { flex: 1; font-size: 17px; font-weight: 700; color: var(--blue); }
-.service { display: flex; align-items: center; gap: 10px; min-height: 80px; padding: 10px var(--pad); padding-right: 48px; width: 100%; text-align: right; background: var(--bg); border-bottom: 1px solid var(--divider); }
-.service .title { flex: 1; font-size: 17px; font-weight: 400; line-height: 1.4; }
-.service .sub { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
-.empty-note { padding: 18px var(--pad) 18px 32px; color: var(--muted); font-size: 15px; background: var(--bg); border-bottom: 1px solid var(--divider); }
+.panel > div { overflow: hidden; min-height: 0; }
+.cats { padding-bottom: 20px; border-bottom: 1px solid var(--divider); }
+.category { display: flex; align-items: center; width: 100%; height: 44.7px; padding: 0 31.8px 0 15px; }
+.category .title { flex: 1; font-size: 15.2px; font-weight: 700; color: var(--blue); line-height: 1.4; }
+.tri { color: #E8E8EA; transition: transform var(--t); }
+.open > .category .tri, .open > .sub .tri { transform: rotate(180deg); }
+.services { padding-bottom: 20px; }
+.service { position: relative; display: flex; align-items: flex-start; width: 100%; min-height: 56px; padding: 6.5px 31.8px 8px 15px; }
+.service > svg { margin-top: 4.6px; }
+.service::after { content: ''; position: absolute; left: 0; right: 31px; bottom: 0; height: 1px; background: var(--divider-soft); }
+.service:last-child::after { display: none; }
+.service .title { flex: 1; font-size: 14.8px; font-weight: 400; line-height: 1.5; }
+.service .sub-line { display: block; font-size: 12px; color: var(--muted); }
+.empty-note { padding: 14px 31.8px 18px; color: var(--muted); font-size: 14px; border-bottom: 1px solid var(--divider); }
 
 /* Data tab */
-.profile { background: var(--navy); padding: 18px var(--pad) 20px; display: flex; align-items: center; gap: 14px; }
-.avatar { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.12); display: grid; place-items: center; }
-.profile .uname { font-size: 20px; font-weight: 700; }
-.profile .cid { color: #C7D2E4; font-size: 15px; direction: ltr; text-align: right; }
-.dots { display: flex; gap: 6px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; }
-.fields { padding: 8px var(--pad) 16px; background: var(--bg); border-bottom: 1px solid var(--divider); display: grid; gap: 10px; }
-.field label { display: block; color: var(--blue); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-.field .val { background: var(--row); border-radius: 12px; padding: 10px 14px; font-size: 16px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.field .val.ltr span { direction: ltr; }
-.out-of-scope { height: 100%; display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 17px; padding: 40px; }
+.data-head { position: sticky; top: -45px; z-index: 2; background: var(--bg); transition: background var(--t), transform var(--t); }
+.app.data-hidden .data-head { transform: translateY(-100%); }
+.app.data-stuck .data-head { background: var(--head); }
+.app.data-stuck .data-head .search { background: var(--head-field); }
+.profile { position: relative; height: 71px; margin-top: 14px; }
+.avatar { position: absolute; right: 21px; top: 0; width: 60.3px; height: 60.3px; border-radius: 50%; overflow: hidden; border: 1.5px solid #E9EDF3; background: #CFDCEB; }
+.avatar img { width: 100%; height: 100%; display: block; }
+.uname { position: absolute; right: 102.6px; top: 4px; font-size: 15.6px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
+.ucid { position: absolute; right: 102.3px; top: 33px; font-size: 12.6px; font-weight: 400; color: var(--id); line-height: 1.6; direction: ltr; }
+.refresh { position: absolute; left: 12px; top: 20px; }
+.data-head .search { margin: 0 11px 0 10.8px; height: 34px; border-radius: 10px; }
+.data-head .gap { height: 22px; }
+.viewmode { display: flex; align-items: center; justify-content: space-between; height: 51.5px; padding-top: 3px; padding: 0 13px 0 15px; border-bottom: 1px solid var(--divider); }
+.viewmode .label { color: var(--label); font-size: 14.2px; font-weight: 400; }
+.viewmode .icons { display: flex; align-items: center; gap: 6px; direction: ltr; }
+.viewmode button { display: grid; place-items: center; color: #474749; }
+.viewmode button.on { color: var(--label); }
+.data-list .agency:first-child { border-top: 0; }
+.subs { border-bottom: 1px solid var(--divider); padding-bottom: 22px; }
+.sub { display: flex; align-items: center; width: 100%; height: 45.4px; padding: 0 60.5px 0 17px; position: relative; }
+.sub-wrap { position: relative; }
+.sub-wrap::after { content: ''; position: absolute; left: 0; right: 61.6px; bottom: 0; height: 1px; background: var(--divider-soft); }
+.sub-wrap:last-child::after { display: none; }
+.sub .title { flex: 1; font-size: 15.75px; font-weight: 400; line-height: 1.5; white-space: pre; }
+.sub .end { display: flex; align-items: center; gap: 18px; direction: ltr; }
+.fields { padding: 5.5px 59.6px 15.5px 12.2px; }
+.flabel { color: var(--label); font-size: 15.5px; font-weight: 700; line-height: 1.5; margin: 0 0 8px; }
+.fbox { display: flex; align-items: center; justify-content: space-between; height: 34px; border: 1.4px solid var(--box-border); border-radius: 8px; padding: 0 8.8px 0 16px; margin-bottom: 8.7px; }
+.fbox .v { font-size: 14.8px; font-weight: 400; line-height: 1.3; white-space: pre-wrap; }
+.fbox .l { display: flex; align-items: center; gap: 19px; direction: ltr; }
+.more { display: flex; gap: 1.6px; }
+.more i { width: 4.6px; height: 4.6px; border-radius: 50%; background: #fff; }
+.fbox.tall { height: auto; min-height: 34px; padding-top: 6px; padding-bottom: 6px; }
+.out-of-scope { height: 100%; display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 16px; padding: 40px; }
 
 /* Bottom nav */
-nav.bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 88px; background: rgba(18,18,18,.96); border-top: 1px solid var(--divider); display: flex; justify-content: space-around; padding: 8px 6px 22px; z-index: 6; }
-nav.bottom button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--muted); font-size: 12px; font-weight: 500; }
-nav.bottom button.active { color: var(--blue); }
+nav.bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 88px; background: var(--bg); display: grid; grid-template-columns: repeat(5, 1fr); direction: rtl; z-index: 5; }
+nav.bottom button { position: relative; display: flex; flex-direction: column; align-items: center; color: var(--nav-off); font-size: 11.8px; font-weight: 400; padding-top: 13px; }
+nav.bottom button .ic { height: 27px; display: grid; place-items: center; }
+nav.bottom button .lb { margin-top: 9.5px; line-height: 1.4; }
+nav.bottom button.active { color: var(--nav-on); }
+nav.bottom button.active .fill { fill: currentColor; }
+nav.bottom button.active .cut { stroke: var(--bg); }
+.badge { position: absolute; top: 6.5px; left: calc(50% - 29px); width: 17px; height: 17px; border-radius: 50%; background: var(--badge); color: #fff; font-size: 10.5px; font-weight: 700; line-height: 17px; text-align: center; }
+.home-ind { position: absolute; bottom: 7px; left: 50%; width: 136px; height: 3.5px; margin-left: -68px; border-radius: 2px; background: #C8C8CA; z-index: 6; pointer-events: none; }
 
-/* Agent button */
-.agent-btn { position: absolute; left: 16px; bottom: 108px; width: 60px; height: 60px; border-radius: 50%; background: var(--navy); border: 1.5px solid rgba(255,255,255,.35); display: grid; place-items: center; z-index: 7; box-shadow: 0 8px 24px rgba(0,0,0,.5); transition: transform var(--t); }
+/* Agent button: where the app's "?" button is (41 px, left 15.6, top 715) */
+.agent-btn { position: absolute; left: 15.6px; top: 715px; width: 41.3px; height: 41.3px; border-radius: 50%; background: var(--fab); display: grid; place-items: center; z-index: 7; box-shadow: 0 2px 8px rgba(0,0,0,.35); transition: transform var(--t); }
 .agent-btn:active { transform: scale(.94); }
+@media (max-width: 500px) { .agent-btn { top: auto; bottom: 110px; } }
 
 /* Chat drawer */
 .backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity var(--t); z-index: 8; }
 .drawer { position: absolute; left: 0; right: 0; bottom: 0; height: 85%; background: #17171A; border-radius: 22px 22px 0 0; z-index: 9; display: flex; flex-direction: column; transform: translateY(102%); transition: transform var(--t) ease-out; }
 .chat-open .backdrop { opacity: 1; pointer-events: auto; }
 .chat-open .drawer { transform: translateY(0); }
-.drawer-head { flex: none; display: flex; align-items: center; gap: 12px; padding: 14px var(--pad); border-bottom: 1px solid var(--divider); }
+.drawer-head { flex: none; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--divider); }
 .drawer-head .who { flex: 1; }
-.drawer-head .aname { font-size: 18px; font-weight: 700; }
-.drawer-head .asub { font-size: 13px; color: var(--muted); }
-.drawer-head button { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--row); }
-.msgs { flex: 1; overflow-y: auto; padding: 14px var(--pad); display: flex; flex-direction: column; gap: 10px; }
-.bubble { max-width: 85%; padding: 10px 14px; border-radius: 18px; font-size: 16px; font-weight: 400; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
-.bubble.user { align-self: flex-start; background: var(--blue); border-bottom-right-radius: 6px; }
+.drawer-head .aname { font-size: 17px; font-weight: 700; }
+.drawer-head .asub { font-size: 12.5px; color: var(--muted); }
+.drawer-head button { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: #2C2C2E; }
+.chip { width: 44px; height: 44px; border-radius: 50%; background: var(--fab); display: grid; place-items: center; flex: none; }
+.msgs { flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.bubble { max-width: 85%; padding: 9px 14px; border-radius: 18px; font-size: 15px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
+.bubble.user { align-self: flex-start; background: var(--nav-on); border-bottom-right-radius: 6px; }
 .bubble.agent { align-self: flex-end; background: #2C2C2E; border-bottom-left-radius: 6px; }
 .bubble.error { align-self: flex-end; background: #3A1D1D; color: #FCA5A5; }
-.welcome { color: var(--muted); font-size: 15px; text-align: center; margin: 4px 0 6px; }
+.welcome { color: var(--muted); font-size: 14px; text-align: center; margin: 4px 0 6px; }
 .quick { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-.quick button { background: var(--row); border: 1px solid var(--divider); border-radius: 18px; padding: 8px 14px; font-size: 15px; color: var(--blue); }
+.quick button { background: #2C2C2E; border-radius: 18px; padding: 7px 14px; font-size: 14px; color: var(--nav-on); }
 .typing { align-self: flex-end; display: flex; gap: 4px; padding: 14px; background: #2C2C2E; border-radius: 18px; }
 .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: blink 1s infinite; }
 .typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
 @keyframes blink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
-.composer { flex: none; display: flex; gap: 8px; padding: 10px var(--pad) 22px; border-top: 1px solid var(--divider); }
-.composer input { flex: 1; min-width: 0; height: 46px; border-radius: 23px; border: 1px solid var(--divider); background: var(--row); color: var(--text); padding: 0 16px; font-size: 16px; outline: none; }
-.composer button { width: 46px; height: 46px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; }
+.composer { flex: none; display: flex; gap: 8px; padding: 10px 16px 22px; border-top: 1px solid var(--divider); }
+.composer input { flex: 1; min-width: 0; height: 44px; border-radius: 22px; border: 1px solid var(--box-border); background: var(--field); color: var(--text); padding: 0 16px; font-size: 15px; outline: none; }
+.composer button { width: 44px; height: 44px; border-radius: 50%; background: var(--nav-on); display: grid; place-items: center; }
 .composer button:disabled { opacity: .5; }
 
 /* Settings sheet */
-.settings { position: absolute; inset: var(--bar, 29px) 0 0 0; background: var(--bg); z-index: 10; display: flex; flex-direction: column; transform: translateX(-102%); transition: transform var(--t) ease-out; }
+.settings { position: absolute; inset: 0; background: var(--bg); z-index: 10; display: flex; flex-direction: column; transform: translateX(-102%); transition: transform var(--t) ease-out; }
 .settings-open .settings { transform: translateX(0); }
-.settings .body { flex: 1; overflow-y: auto; padding: 8px var(--pad) 24px; }
-.settings h2 { font-size: 17px; color: var(--blue); margin: 18px 0 8px; }
-.opt { display: flex; gap: 12px; align-items: flex-start; background: var(--row); border-bottom: 1px solid var(--divider); padding: 14px; cursor: pointer; }
+.settings .titlebar { margin-top: 30px; }
+.settings .body { flex: 1; overflow-y: auto; padding: 4px 16px 24px; }
+.settings h2 { font-size: 15px; color: var(--blue); margin: 18px 0 8px; }
+.opt { display: flex; gap: 12px; align-items: flex-start; background: #232325; border-bottom: 1px solid var(--divider); padding: 13px; cursor: pointer; }
 .opt:first-of-type { border-radius: 12px 12px 0 0; } .opt:last-of-type { border-radius: 0 0 12px 12px; border-bottom: 0; }
-.opt input { margin-top: 6px; accent-color: var(--blue); }
-.opt .t { font-weight: 700; direction: ltr; text-align: right; }
-.opt .d { color: var(--muted); font-size: 14px; }
-.settings .txt { width: 100%; height: 46px; border-radius: 10px; border: 1px solid var(--divider); background: var(--row); color: var(--text); padding: 0 12px; direction: ltr; outline: none; }
-.settings .hint { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
-.btn { width: 100%; height: 48px; border-radius: 12px; background: var(--blue); font-weight: 700; font-size: 16px; margin-top: 18px; }
-.btn.ghost { background: var(--row); color: var(--red); }
-.result { margin-top: 12px; padding: 12px; border-radius: 10px; background: var(--row); font-size: 15px; display: none; }
+.opt input { margin-top: 6px; accent-color: var(--nav-on); }
+.opt .t { font-weight: 600; direction: ltr; text-align: right; font-size: 14px; }
+.opt .d { color: var(--muted); font-size: 13px; }
+.settings .txt { width: 100%; height: 44px; border-radius: 10px; border: 1px solid var(--box-border); background: var(--field); color: var(--text); padding: 0 12px; direction: ltr; outline: none; }
+.settings .hint { color: var(--muted); font-size: 12.5px; margin: 6px 0 0; }
+.btn { width: 100%; height: 46px; border-radius: 12px; background: var(--nav-on); font-weight: 700; font-size: 15px; margin-top: 18px; text-align: center; }
+.btn.ghost { background: #232325; color: var(--red); }
+.result { margin-top: 12px; padding: 12px; border-radius: 10px; background: #232325; font-size: 14px; display: none; white-space: pre-wrap; }
 .result.ok { display: block; color: #4ADE80; } .result.bad { display: block; color: #FCA5A5; } .result.wait { display: block; color: var(--muted); }
 </style>
 </head>
@@ -137,97 +186,91 @@ nav.bottom button.active { color: var(--blue); }
 <div class="phone">
 <div class="screen" id="screen">
   <div class="demo-bar">نموذج تجريبي — ليس التطبيق الرسمي</div>
-  <div class="status">
-    <span id="clock">٩:٤١</span>
-    <span class="icons" aria-hidden="true">
-      <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#fff"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="#fff"/><rect x="10" y="3" width="3" height="9" rx="1" fill="#fff"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#fff"/></svg>
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M4 7a6 6 0 0 1 8 0"/><circle cx="8" cy="10" r="1" fill="#fff"/></svg>
-      <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="17" height="9" rx="2" fill="#fff"/><rect x="25" y="4.5" width="1.6" height="4" rx=".8" fill="#fff" opacity=".5"/></svg>
-    </span>
-  </div>
-  <header class="top">
-    <h1 id="title">خدمات</h1>
-    <div class="actions">
-      <button id="megaphone" aria-label="إعلانات"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.2v3.6c0 .5.4 1 1 1h2.2l6.3 3.9c.6.4 1.5-.1 1.5-.9V6.2c0-.8-.9-1.3-1.5-.9L7.2 9.2H5c-.6 0-1 .4-1 1z"/><path d="M7.5 15l1.3 4.3c.1.4.5.7.9.7h.9"/><path d="M18 9.3c.9.7 1.4 1.6 1.4 2.7s-.5 2-1.4 2.7"/></svg></button>
-      <button id="menu" aria-label="الإعدادات"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M4 6.5h16"/><path d="M4 12h16"/><path d="M4 17.5h16"/></svg></button>
+  <div class="app" id="app">
+    <div class="status">
+      <span class="clock" id="clock">١٤:١٣</span>
+      <span class="icons" aria-hidden="true">
+        <span class="battery">٨٠</span>
+        <svg width="13" height="11" viewBox="0 0 13 11"><rect x="0" y="7.5" width="2" height="3.5" rx=".6" fill="#fff"/><rect x="3.6" y="5" width="2" height="6" rx=".6" fill="#fff"/><rect x="7.2" y="2.5" width="2" height="8.5" rx=".6" fill="#fff"/><rect x="10.8" y="0" width="2" height="11" rx=".6" fill="#fff" opacity=".45"/></svg>
+        <svg width="13" height="14" viewBox="0 0 13 14"><text x="0" y="7" fill="#fff" font-size="7.5" font-weight="700" font-family="sans-serif">5G</text><path d="M3 9.5v4M1.6 11l1.4-1.5L4.4 11M8 9.5v4M6.6 12l1.4 1.5L9.4 12" stroke="#fff" stroke-width="1" fill="none"/></svg>
+      </span>
     </div>
-  </header>
-  <div class="search" id="searchBox">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
-    <input id="search" type="search" placeholder="ابحث عن الخدمة" autocomplete="off" enterkeyhint="search">
-  </div>
-  <main class="content" id="content"></main>
 
-  <button class="agent-btn" id="agentBtn" aria-label="افتح سهّال">
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5c0-1.9 1.6-3.5 3.5-3.5h9"/><path d="M26 15.5v2c0 1.9-1.6 3.5-3.5 3.5H14l-5.2 4.3c-.5.4-1.3.1-1.3-.6V21H9.5C7.6 21 6 19.4 6 17.5v-5"/><path d="M24.5 3.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z" fill="#fff" stroke-width="1.2"/></svg>
-  </button>
+    <main class="view" id="view"></main>
 
-  <nav class="bottom" id="nav">
-    <button data-tab="data"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8.3" r="3.8"/><path d="M4.8 20c.6-3.7 3.5-6 7.2-6s6.6 2.3 7.2 6"/></svg>بيانات</button>
-    <button data-tab="services" class="active"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7.5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2V8z"/><path d="M14 3.5V8h4.5"/><path d="M9 12.5h6M9 16h4"/></svg>خدمات</button>
-    <button data-tab="notifications"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 16.5V11a5.8 5.8 0 0 1 11.6 0v5.5l1.5 1.8H4.7z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg>إشعارات</button>
-    <button data-tab="appointments"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="3.6" r="1.4"/><circle cx="16.4" cy="5" r="1.4"/><circle cx="19" cy="8.8" r="1.4"/><circle cx="19" cy="13.2" r="1.4"/><circle cx="16.4" cy="17" r="1.4"/><circle cx="7.6" cy="5" r="1.4"/><circle cx="5" cy="8.8" r="1.4"/><circle cx="5" cy="13.2" r="1.4"/><circle cx="7.6" cy="17" r="1.4"/><path d="M12 18.3v3.2M10.5 21.5h3" stroke-linecap="round"/></svg>مواعيد</button>
-    <button data-tab="report"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5c0-1.1.9-2 2-2h2l1.5-2h5L16 6.5h2c1.1 0 2 .9 2 2V17c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2z"/><circle cx="12" cy="12.5" r="3.6"/></svg>بلّغ</button>
-  </nav>
+    <button class="agent-btn" id="agentBtn" aria-label="افتح سهّال">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5c0-1.9 1.6-3.5 3.5-3.5h9"/><path d="M26 15.5v2c0 1.9-1.6 3.5-3.5 3.5H14l-5.2 4.3c-.5.4-1.3.1-1.3-.6V21H9.5C7.6 21 6 19.4 6 17.5v-5"/><path d="M24.5 3.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z" fill="#fff" stroke-width="1.2"/></svg>
+    </button>
 
-  <div class="backdrop" id="backdrop"></div>
-  <section class="drawer" id="drawer" aria-label="محادثة سهّال" role="dialog">
-    <div class="drawer-head">
-      <div class="logo" style="width:44px;height:44px;background:var(--navy);border:1.5px solid rgba(255,255,255,.35)"><svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5c0-1.9 1.6-3.5 3.5-3.5h9"/><path d="M26 15.5v2c0 1.9-1.6 3.5-3.5 3.5H14l-5.2 4.3c-.5.4-1.3.1-1.3-.6V21H9.5C7.6 21 6 19.4 6 17.5v-5"/><path d="M24.5 3.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z" fill="#fff" stroke-width="1.2"/></svg></div>
-      <div class="who"><div class="aname">سهّال</div><div class="asub">مساعدك في خدمات سهل</div></div>
-      <button id="closeChat" aria-label="إغلاق"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></button>
-    </div>
-    <div class="msgs" id="msgs">
-      <div class="welcome">اسألني عن أي خدمة في سهل بلهجتك، وأقولك وين تلقاها وشنو تحتاج.</div>
-      <div class="quick" id="quick">
-        <button>تجديد البطاقة المدنية</button>
-        <button>استمرارية الزواج</button>
-        <button>دفع مخالفات المرور</button>
-        <button>تجديد الإقامة</button>
+    <nav class="bottom" id="nav">
+      <button data-tab="data"><span class="badge" id="badge">4</span><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle class="fill" cx="12" cy="8" r="4.1"/><path class="fill" d="M4.2 20.6c0-3.6 3.5-6.2 7.8-6.2s7.8 2.6 7.8 6.2z"/></svg></span><span class="lb">بيانات</span></button>
+      <button data-tab="services" class="active"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path class="fill" d="M6.5 2.8h7.2L18.6 7.7V20a1.2 1.2 0 0 1-1.2 1.2H6.5A1.2 1.2 0 0 1 5.3 20V4a1.2 1.2 0 0 1 1.2-1.2z"/><path class="cut" d="M8.5 11.2h7M8.5 14.2h7M8.5 17.2h7" stroke-linecap="round"/></svg></span><span class="lb">خدمات</span></button>
+      <button data-tab="notifications"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.3 16.6v-5.3a5.7 5.7 0 0 1 11.4 0v5.3l1.6 1.9H4.7z"/><path d="M10 21a2.1 2.1 0 0 0 4 0"/><path d="M3.6 6.5A9 9 0 0 1 6 3.4M20.4 6.5A9 9 0 0 0 18 3.4"/></svg></span><span class="lb">إشعارات</span></button>
+      <button data-tab="appointments"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8.2" r="1.55"/><circle cx="8.4" cy="9.4" r="1.55"/><circle cx="15.6" cy="9.4" r="1.55"/><circle cx="5.6" cy="11.8" r="1.55"/><circle cx="18.4" cy="11.8" r="1.55"/><circle cx="3.8" cy="15" r="1.55"/><circle cx="20.2" cy="15" r="1.55"/><path d="M5.4 15.6h13.2M8 13.2l1.6 2.4M16 13.2l-1.6 2.4M12 10v5.6" stroke-linecap="round"/></svg></span><span class="lb">مواعيد</span></button>
+      <button data-tab="report"><span class="ic"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3.6 8.2c0-1 .8-1.8 1.8-1.8h2.4l1.5-2.2h5.4l1.5 2.2h2.4c1 0 1.8.8 1.8 1.8v10c0 1-.8 1.8-1.8 1.8H5.4c-1 0-1.8-.8-1.8-1.8z"/><circle cx="12" cy="12.8" r="3.6"/></svg></span><span class="lb">بلّغ</span></button>
+    </nav>
+    <div class="home-ind"></div>
+
+    <div class="backdrop" id="backdrop"></div>
+    <section class="drawer" id="drawer" aria-label="محادثة سهّال" role="dialog">
+      <div class="drawer-head">
+        <div class="chip"><svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5c0-1.9 1.6-3.5 3.5-3.5h9"/><path d="M26 15.5v2c0 1.9-1.6 3.5-3.5 3.5H14l-5.2 4.3c-.5.4-1.3.1-1.3-.6V21H9.5C7.6 21 6 19.4 6 17.5v-5"/><path d="M24.5 3.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z" fill="#fff" stroke-width="1.2"/></svg></div>
+        <div class="who"><div class="aname">سهّال</div><div class="asub">مساعدك في خدمات سهل</div></div>
+        <button id="closeChat" aria-label="إغلاق"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></button>
       </div>
-    </div>
-    <form class="composer" id="composer" autocomplete="off">
-      <input id="chatInput" placeholder="اكتب سؤالك هنا…" enterkeyhint="send">
-      <button id="sendBtn" type="submit" aria-label="إرسال"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5"/><path d="M11 5.5 4.5 12l6.5 6.5"/></svg></button>
-    </form>
-  </section>
-
-  <section class="settings" id="settings" aria-label="الإعدادات" role="dialog">
-    <header class="top">
-      <h1>الإعدادات</h1>
-      <div class="actions"><button id="closeSettings" aria-label="رجوع"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></svg></button></div>
-    </header>
-    <div class="body">
-      <h2>طريقة اتصال سهّال</h2>
-      <div id="providerList">
-        <label class="opt"><input type="radio" name="provider" value="claude-cli"><div><div class="t">Claude Code CLI</div><div class="d">يستخدم اشتراكك في Claude على هالجهاز. ما يحتاج مفتاح.</div></div></label>
-        <label class="opt"><input type="radio" name="provider" value="codex-cli"><div><div class="t">Codex CLI</div><div class="d">يستخدم اشتراكك في ChatGPT عن طريق Codex على هالجهاز.</div></div></label>
-        <label class="opt"><input type="radio" name="provider" value="anthropic"><div><div class="t">Anthropic API key</div><div class="d">مفتاح API من Anthropic، ينحفظ في هالمتصفح بس.</div></div></label>
-        <label class="opt"><input type="radio" name="provider" value="openai"><div><div class="t">OpenAI API key</div><div class="d">مفتاح API من OpenAI، ينحفظ في هالمتصفح بس.</div></div></label>
-      </div>
-      <div id="keyBlock" hidden>
-        <h2>مفتاح API</h2>
-        <input class="txt" id="apiKey" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false">
-        <p class="hint">المفتاح يبقى في هالمتصفح فقط، ويوصل للسيرفر المحلي مع كل سؤال بدون ما ينحفظ.</p>
-        <div id="openaiModelBlock" hidden>
-          <h2>موديل OpenAI</h2>
-          <input class="txt" id="openaiModel" placeholder="gpt-4.1-mini" spellcheck="false">
+      <div class="msgs" id="msgs">
+        <div class="welcome">اسألني عن أي خدمة في سهل بلهجتك، وأقولك وين تلقاها وشنو تحتاج.</div>
+        <div class="quick" id="quick">
+          <button>تجديد البطاقة المدنية</button>
+          <button>استمرارية الزواج</button>
+          <button>دفع مخالفات المرور</button>
+          <button>تجديد الإقامة</button>
         </div>
       </div>
-      <button class="btn" id="testBtn">اختبار الاتصال</button>
-      <div class="result" id="testResult"></div>
-      <button class="btn ghost" id="clearBtn">مسح المحادثة والمفتاح</button>
-      <p class="hint" style="margin-top:18px">هذا نموذج تجريبي مستقل يحاكي شكل تطبيق سهل. ما يرتبط بأي نظام حكومي، وما يسوي أي معاملة حقيقية.</p>
-    </div>
-  </section>
+      <form class="composer" id="composer" autocomplete="off">
+        <input id="chatInput" placeholder="اكتب سؤالك هنا…" enterkeyhint="send">
+        <button id="sendBtn" type="submit" aria-label="إرسال"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5"/><path d="M11 5.5 4.5 12l6.5 6.5"/></svg></button>
+      </form>
+    </section>
+
+    <section class="settings" id="settings" aria-label="الإعدادات" role="dialog">
+      <div class="titlebar">
+        <h1>الإعدادات</h1>
+        <div class="icons"><button id="closeSettings" aria-label="رجوع"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></svg></button></div>
+      </div>
+      <div class="body">
+        <h2>طريقة اتصال سهّال</h2>
+        <div id="providerList">
+          <label class="opt"><input type="radio" name="provider" value="claude-cli"><div><div class="t">Claude Code CLI</div><div class="d">يستخدم اشتراكك في Claude على هالجهاز. ما يحتاج مفتاح.</div></div></label>
+          <label class="opt"><input type="radio" name="provider" value="codex-cli"><div><div class="t">Codex CLI</div><div class="d">يستخدم اشتراكك في ChatGPT عن طريق Codex على هالجهاز.</div></div></label>
+          <label class="opt"><input type="radio" name="provider" value="anthropic"><div><div class="t">Anthropic API key</div><div class="d">مفتاح API من Anthropic، ينحفظ في هالمتصفح بس.</div></div></label>
+          <label class="opt"><input type="radio" name="provider" value="openai"><div><div class="t">OpenAI API key</div><div class="d">مفتاح API من OpenAI، ينحفظ في هالمتصفح بس.</div></div></label>
+        </div>
+        <div id="keyBlock" hidden>
+          <h2>مفتاح API</h2>
+          <input class="txt" id="apiKey" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false">
+          <p class="hint">المفتاح يبقى في هالمتصفح فقط، ويوصل للسيرفر المحلي مع كل سؤال بدون ما ينحفظ.</p>
+          <div id="openaiModelBlock" hidden>
+            <h2>موديل OpenAI</h2>
+            <input class="txt" id="openaiModel" placeholder="gpt-4.1-mini" spellcheck="false">
+          </div>
+        </div>
+        <button class="btn" id="testBtn">اختبار الاتصال</button>
+        <div class="result" id="testResult"></div>
+        <button class="btn ghost" id="clearBtn">مسح المحادثة والمفتاح</button>
+        <p class="hint" style="margin-top:18px">هذا نموذج تجريبي مستقل يحاكي شكل تطبيق سهل. ما يرتبط بأي نظام حكومي، وما يسوي أي معاملة حقيقية، وكل البيانات فيه وهمية.</p>
+      </div>
+    </section>
+  </div>
 </div>
 </div>
 
 <script>
 (() => {
   const $ = (s) => document.querySelector(s);
+  const app = $('#app');
   const screen = $('#screen');
-  const content = $('#content');
+  const view = $('#view');
   const store = {
     get(k, d) { try { const v = localStorage.getItem('sahel.' + k); return v === null ? d : v; } catch { return d; } },
     set(k, v) { try { localStorage.setItem('sahel.' + k, v); } catch {} },
@@ -238,38 +281,46 @@ nav.bottom button.active { color: var(--blue); }
   const AR = '٠١٢٣٤٥٦٧٨٩';
   const toArabicDigits = (s) => String(s).replace(/\d/g, (d) => AR[d]);
   function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-  const CHEV_DOWN = '<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>';
-  const CHEV_LEFT = '<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6l-6 6 6 6"/></svg>';
-  // First letter of the agency's distinctive word (skips generic words like وزارة / الهيئة العامة).
-  const GENERIC = new Set(['وزارة', 'الهيئة', 'المؤسسة', 'الإدارة', 'الأمانة', 'الديوان', 'المركز', 'العامة', 'العام', 'الوطني', 'ديوان', 'قوة']);
+  const CHEV = '<svg class="chev" width="11" height="7" viewBox="0 0 11 7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1.2 1.2 5.5 5.5 9.8 1.2"/></svg>';
+  const TRI = '<svg class="tri" width="10" height="5" viewBox="0 0 10 5"><path d="M0 0h10L5 5z" fill="currentColor"/></svg>';
+  const CHEV_LEFT = '<svg width="8" height="13" viewBox="0 0 8 13" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 1.2 1.4 6.5l5.2 5.3"/></svg>';
+  const MORE = '<span class="more"><i></i><i></i><i></i></span>';
+  // Letter circles (no official logos): first letter of the agency's distinctive word.
+  const GENERIC = new Set(['وزارة', 'الهيئة', 'المؤسسة', 'الإدارة', 'الأمانة', 'الديوان', 'المركز', 'العامة', 'العام', 'الوطني', 'الوطنى', 'ديوان', 'قوة']);
   function firstLetter(name) {
     const words = name.replace(/[ًٌٍَُِّْـ]/g, '').split(/\s+/);
     const word = (words.find((w) => !GENERIC.has(w)) || words[0]).replace(/^(لل|ال|ل(?=ش))/, '');
     const m = word.match(/[ء-ي]/);
     return m ? m[0] : '•';
   }
-  function colorFor(i) { return `hsl(${Math.round((i * 137.508) % 360)}, 55%, 42%)`; }
+  const colorFor = (i) => `hsl(${Math.round((i * 137.508) % 360)}, 52%, 42%)`;
+  function logo(name) {
+    const i = Math.max(0, KB.agencies.findIndex((a) => a.name === name));
+    const l = el('div', 'logo', firstLetter(name));
+    l.style.background = colorFor(i);
+    return l;
+  }
+  function dot(kind) { return kind ? el('span', 'dot ' + kind) : null; }
 
-  // ---------- clock ----------
+  // ---------- clock: 24 h, Eastern Arabic digits ----------
   function tick() {
     const d = new Date();
-    let h = d.getHours() % 12 || 12;
-    $('#clock').textContent = toArabicDigits(`${h}:${String(d.getMinutes()).padStart(2, '0')}`);
+    $('#clock').textContent = toArabicDigits(`${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`);
   }
   tick(); setInterval(tick, 15000);
-  screen.style.setProperty('--bar', document.querySelector('.demo-bar').offsetHeight + 'px');
 
   // ---------- data ----------
   let KB = { agencies: [], services: [] };
+  let PROFILE = { name: '', civilId: '', data: [] };
   const byAgency = new Map();
 
-  async function loadKB() {
+  async function load() {
     try {
-      const res = await fetch('/api/services');
-      KB = await res.json();
+      const [kb, profile] = await Promise.all([fetch('/api/services').then((r) => r.json()), fetch('/api/profile').then((r) => r.json())]);
+      KB = kb; PROFILE = profile;
     } catch {
-      content.textContent = '';
-      content.append(el('div', 'out-of-scope', 'تعذر تحميل قائمة الخدمات. تأكد إن السيرفر شغال.'));
+      view.textContent = '';
+      view.append(el('div', 'out-of-scope', 'تعذر تحميل البيانات. تأكد إن السيرفر شغال.'));
       return;
     }
     for (const a of KB.agencies) byAgency.set(a.name, new Map());
@@ -279,27 +330,59 @@ nav.bottom button.active { color: var(--blue); }
       if (!cats.has(s.category)) cats.set(s.category, []);
       cats.get(s.category).push(s);
     }
+    $('#badge').textContent = String(PROFILE.badge ?? 4);
     render();
   }
 
+  // ---------- shared header row ----------
+  function titlebar(title) {
+    const t = el('div', 'titlebar');
+    t.append(el('h1', null, title));
+    const icons = el('div', 'icons');
+    const menu = el('button'); menu.setAttribute('aria-label', 'الإعدادات'); menu.id = 'menu';
+    menu.innerHTML = '<svg width="23" height="15" viewBox="0 0 23 15" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M1.2 1.3h20.6M5.5 7.5h16.3M10 13.7h11.8"/></svg>';
+    menu.addEventListener('click', openSettings);
+    const mega = el('button'); mega.setAttribute('aria-label', 'إعلانات');
+    mega.innerHTML = '<svg width="20" height="17" viewBox="0 0 20 17"><path d="M1 6.2v4.2c0 .5.4.9.9.9h1.6l5.6 3.8c.5.3 1.1 0 1.1-.6V2.1c0-.6-.6-.9-1.1-.6L3.5 5.3H1.9c-.5 0-.9.4-.9.9z" fill="#fff"/><path d="M3.6 11.3 5 15.4c.1.4.5.6.9.6h.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M14 8.3h4.6M13.4 4.3l3.6-2.6M13.4 12.3l3.6 2.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    icons.append(mega, menu);
+    t.append(icons);
+    return t;
+  }
+
+  function searchBox(placeholder, value, onInput) {
+    const box = el('label', 'search');
+    box.innerHTML = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D6D6D8" stroke-width="2.6" stroke-linecap="round"><circle cx="10" cy="10" r="6.6"/><path d="M15 15l6 6"/></svg>';
+    const input = el('input'); input.type = 'search'; input.placeholder = placeholder; input.value = value || ''; input.autocomplete = 'off';
+    input.addEventListener('input', () => onInput(input.value));
+    box.append(input);
+    return { box, input };
+  }
+
   // ---------- services tab ----------
+  let svcQuery = '';
   function serviceRow(s, withSub) {
     const b = el('button', 'service');
     const t = el('span', 'title', s.name);
-    if (withSub) t.append(el('span', 'sub', `${s.agency} ← ${s.category}`));
+    if (withSub) t.append(el('span', 'sub-line', `${s.agency} ← ${s.category}`));
     b.append(t);
     b.insertAdjacentHTML('beforeend', CHEV_LEFT);
     b.addEventListener('click', () => askAbout(s.name));
     return b;
   }
 
-  function agencyRow(a, i) {
-    const wrap = el('div', 'agency-wrap');
+  function agencyHead(name, alert) {
     const head = el('button', 'agency');
-    const logo = el('div', 'logo', firstLetter(a.name));
-    logo.style.background = colorFor(i);
-    head.append(logo, el('span', 'name', a.name));
-    head.insertAdjacentHTML('beforeend', CHEV_DOWN);
+    head.append(logo(name), el('span', 'name', name));
+    const end = el('span', 'end');
+    end.insertAdjacentHTML('beforeend', CHEV);
+    const d = dot(alert); if (d) end.append(d);
+    head.append(end);
+    return head;
+  }
+
+  function agencyRow(a) {
+    const wrap = el('div', 'agency-wrap');
+    const head = agencyHead(a.name);
     head.setAttribute('aria-expanded', 'false');
     const panel = el('div', 'panel');
     const inner = el('div');
@@ -320,113 +403,175 @@ nav.bottom button.active { color: var(--blue); }
       inner.append(el('div', 'empty-note', 'هالجهة موجودة في سهل بس لسا ما انضافت للنموذج التجريبي'));
       return;
     }
+    const box = el('div', 'cats');
     for (const [cat, list] of cats) {
       const cwrap = el('div', 'cat-wrap');
       const ch = el('button', 'category');
-      ch.append(el('span', 'title', cat || 'خدمات'));
-      ch.insertAdjacentHTML('beforeend', CHEV_DOWN);
+      ch.append(el('span', 'title', cat));
+      ch.insertAdjacentHTML('beforeend', TRI);
       const cp = el('div', 'panel');
-      const ci = el('div');
+      const holder = el('div');
+      const ci = el('div', 'services');
       list.forEach((s) => ci.append(serviceRow(s, false)));
-      cp.append(ci);
+      holder.append(ci);
+      cp.append(holder);
       ch.addEventListener('click', () => cwrap.classList.toggle('open'));
       cwrap.append(ch, cp);
-      inner.append(cwrap);
+      box.append(cwrap);
     }
+    inner.append(box);
   }
 
   function norm(s) {
     return String(s).toLowerCase()
-      .replace(/[ًٌٍَُِّْـ]/g, '').replace(/[إأآا]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي')
+      .replace(/[ًٌٍَُِّْـ]/g, '').replace(/[إأآا]/g, 'ا').replace(/[ىي]/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي')
       .replace(/\s+/g, ' ').trim();
   }
 
   function renderServices() {
-    content.textContent = '';
-    const q = norm($('#search').value);
-    if (!q) {
-      KB.agencies.forEach((a, i) => content.append(agencyRow(a, i)));
-      return;
-    }
-    const agencies = KB.agencies.map((a, i) => [a, i]).filter(([a]) => norm(a.name).includes(q));
+    view.textContent = '';
+    const head = el('div', 'svc-head');
+    head.append(titlebar('خدمات'));
+    const { box, input } = searchBox('بحث في الخدمات', svcQuery, (v) => { svcQuery = v; fillServiceList(list); });
+    input.id = 'search';
+    head.append(box);
+    const list = el('div', 'svc-list');
+    view.append(head, list);
+    fillServiceList(list);
+  }
+
+  function fillServiceList(list) {
+    list.textContent = '';
+    const q = norm(svcQuery);
+    if (!q) { KB.agencies.forEach((a) => list.append(agencyRow(a))); return; }
+    const agencies = KB.agencies.filter((a) => [a.name, ...(a.aliases || [])].some((x) => norm(x).includes(q)));
     const services = KB.services.filter((s) => [s.name, s.category, ...(s.aliases || [])].some((x) => norm(x).includes(q)));
-    agencies.forEach(([a, i]) => content.append(agencyRow(a, i)));
-    services.forEach((s) => content.append(serviceRow(s, true)));
+    agencies.forEach((a) => list.append(agencyRow(a)));
+    services.forEach((s) => list.append(serviceRow(s, true)));
     if (!agencies.length && !services.length) {
       const box = el('div', 'out-of-scope');
       box.style.height = 'auto';
       box.append(el('div', null, 'ما لقيت خدمة بهالاسم.'));
       const b = el('button', null, 'اسأل سهّال عنها');
-      b.style.cssText = 'color:var(--blue);margin-top:10px;font-weight:700';
-      b.addEventListener('click', () => { openChat(); send($('#search').value); });
+      b.style.cssText = 'color:var(--nav-on);margin-top:10px;font-weight:700';
+      b.addEventListener('click', () => { openChat(); send(svcQuery); });
       box.append(b);
-      content.append(box);
+      list.append(box);
     }
   }
-  $('#search').addEventListener('input', renderServices);
 
-  // ---------- data tab (dummy values only) ----------
-  const DATA = [
-    { agency: 'الهيئة العامة للمعلومات المدنية', fields: [['الاسم', 'مواطن تجريبي'], ['الرقم المدني', '000000000000', 1], ['تاريخ انتهاء البطاقة', '2027-01-01', 1], ['فصيلة الدم', 'O+', 1], ['العنوان', 'منطقة تجريبية، قطعة 0، شارع 0، منزل 0']] },
-    { agency: 'وزارة الداخلية', alerts: true, fields: [['رقم الجواز', 'X00000000', 1], ['تاريخ انتهاء الجواز', '2026-12-01', 1, 'yellow'], ['رقم اللوحة', '00-00000', 1], ['مخالفات المرور', 'مخالفة واحدة غير مدفوعة', 0, 'red']] },
-    { agency: 'وزارة العدل', fields: [['الحالة الاجتماعية', 'متزوج'], ['الأبناء', 'عبدالله، نورة، فهد']] },
-    { agency: 'وزارة الصحة', fields: [['المركز الصحي', 'مركز صحي تجريبي'], ['شهادات الميلاد المسجلة', '3', 1]] },
-    { agency: 'وزارة الكهرباء والماء والطاقة المتجددة', fields: [['رقم الحساب', '0000000', 1], ['المستحق', '0.000 د.ك', 1]] },
-  ];
+  // ---------- data tab (invented profile from data/profile.json) ----------
+  let dataQuery = '';
+  let viewMode = 'cards';
   function renderData() {
-    content.textContent = '';
+    view.textContent = '';
+    const head = el('div', 'data-head');
+    head.append(titlebar('بيانات'));
     const p = el('div', 'profile');
     const av = el('div', 'avatar');
-    av.innerHTML = '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8.3" r="3.8"/><path d="M4.8 20c.6-3.7 3.5-6 7.2-6s6.6 2.3 7.2 6"/></svg>';
-    const who = el('div');
-    who.append(el('div', 'uname', 'مواطن تجريبي'), el('div', 'cid', '000000000000'));
-    p.append(av, who);
-    content.append(p);
-    DATA.forEach((d) => {
-      const i = Math.max(0, KB.agencies.findIndex((a) => a.name === d.agency));
-      const wrap = el('div', 'agency-wrap');
-      const head = el('button', 'agency');
-      const logo = el('div', 'logo', firstLetter(d.agency));
-      logo.style.background = colorFor(i);
-      head.append(logo, el('span', 'name', d.agency));
-      if (d.alerts) {
-        const dots = el('span', 'dots');
-        const r = el('span', 'dot'); r.style.background = 'var(--red)';
-        const y = el('span', 'dot'); y.style.background = 'var(--yellow)';
-        dots.append(r, y); head.append(dots);
-      }
-      head.insertAdjacentHTML('beforeend', CHEV_DOWN);
-      const panel = el('div', 'panel');
-      const inner = el('div', 'fields');
-      d.fields.forEach(([label, value, ltr, alert]) => {
-        const f = el('div', 'field');
-        f.append(el('label', null, label));
-        const v = el('div', 'val' + (ltr ? ' ltr' : ''));
-        v.append(el('span', null, value));
-        if (alert) { const dot = el('span', 'dot'); dot.style.background = `var(--${alert})`; v.append(dot); }
-        f.append(v); inner.append(f);
-      });
-      const holder = el('div'); holder.append(inner); panel.append(holder);
-      head.addEventListener('click', () => wrap.classList.toggle('open'));
-      wrap.append(head, panel);
-      content.append(wrap);
-    });
+    const img = el('img'); img.src = PROFILE.avatar || 'img/avatar.png'; img.alt = '';
+    av.append(img);
+    const refresh = el('button', 'refresh'); refresh.setAttribute('aria-label', 'تحديث');
+    refresh.innerHTML = '<svg width="28" height="21" viewBox="0 0 28 21" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22.8 8.2A9.4 9.4 0 0 0 5.4 6.6"/><path d="M5.2 12.8a9.4 9.4 0 0 0 17.4 1.6"/><path d="M26 4.6l-3.1 3.9-4-2.9"/><path d="M2 16.4l3.1-3.9 4 2.9"/></svg>';
+    p.append(av, el('div', 'uname', PROFILE.name), el('div', 'ucid', PROFILE.civilId), refresh);
+    head.append(p);
+    const { box } = searchBox('بحث في البيانات', dataQuery, (v) => { dataQuery = v; fillDataList(list); });
+    head.append(box, el('div', 'gap'));
+    const vm = el('div', 'viewmode');
+    vm.append(el('span', 'label', 'طريقة العرض'));
+    const icons = el('span', 'icons');
+    const listBtn = el('button'); listBtn.setAttribute('aria-label', 'عرض قائمة');
+    listBtn.innerHTML = '<svg width="20" height="13" viewBox="0 0 20 13" fill="currentColor"><rect x="0" y="0" width="2.6" height="2.2" rx=".5"/><rect x="4.4" y="0" width="15.6" height="2.2" rx="1"/><rect x="0" y="5.4" width="2.6" height="2.2" rx=".5"/><rect x="4.4" y="5.4" width="15.6" height="2.2" rx="1"/><rect x="0" y="10.8" width="2.6" height="2.2" rx=".5"/><rect x="4.4" y="10.8" width="15.6" height="2.2" rx="1"/></svg>';
+    const cardBtn = el('button'); cardBtn.setAttribute('aria-label', 'عرض بطاقات');
+    cardBtn.innerHTML = '<svg width="18" height="16" viewBox="0 0 18 16" fill="currentColor"><rect x="0" y="0" width="18" height="7" rx="2.6"/><rect x="0" y="9" width="18" height="7" rx="2.6"/></svg>';
+    const sync = () => { listBtn.classList.toggle('on', viewMode === 'list'); cardBtn.classList.toggle('on', viewMode === 'cards'); };
+    listBtn.addEventListener('click', () => { viewMode = 'list'; sync(); });
+    cardBtn.addEventListener('click', () => { viewMode = 'cards'; sync(); });
+    sync();
+    icons.append(listBtn, cardBtn);
+    vm.append(icons);
+    const list = el('div', 'data-list');
+    view.append(head, vm, list);
+    fillDataList(list);
   }
+
+  function fillDataList(list) {
+    list.textContent = '';
+    const q = norm(dataQuery);
+    PROFILE.data.filter((d) => !q || norm(d.agency).includes(q) || d.sections.some((s) => norm(s.title).includes(q)))
+      .forEach((d) => list.append(dataAgency(d)));
+  }
+
+  function dataAgency(d) {
+    const wrap = el('div', 'agency-wrap');
+    const head = agencyHead(d.agency, d.alert);
+    const panel = el('div', 'panel');
+    const holder = el('div');
+    if (d.sections.length) {
+      const subs = el('div', 'subs');
+      d.sections.forEach((s) => subs.append(dataSection(s)));
+      holder.append(subs);
+    }
+    panel.append(holder);
+    head.addEventListener('click', () => wrap.classList.toggle('open'));
+    wrap.append(head, panel);
+    return wrap;
+  }
+
+  function dataSection(s) {
+    const wrap = el('div', 'sub-wrap');
+    const head = el('button', 'sub');
+    head.append(el('span', 'title', s.title));
+    const end = el('span', 'end');
+    end.insertAdjacentHTML('beforeend', TRI);
+    const d = dot(s.alert); if (d) end.append(d);
+    head.append(end);
+    const panel = el('div', 'panel');
+    const holder = el('div');
+    const fields = el('div', 'fields');
+    fields.append(el('div', 'flabel', s.label));
+    s.values.forEach((v) => {
+      const b = el('div', 'fbox' + (v.text.length > 30 ? ' tall' : ''));
+      b.append(el('span', 'v', v.text));
+      const l = el('span', 'l');
+      l.insertAdjacentHTML('beforeend', MORE);
+      const vd = dot(v.alert); if (vd) l.append(vd);
+      b.append(l);
+      fields.append(b);
+    });
+    holder.append(fields);
+    panel.append(holder);
+    head.addEventListener('click', () => wrap.classList.toggle('open'));
+    wrap.append(head, panel);
+    return wrap;
+  }
+
+  // Data header, as in the app: the title scrolls away, profile + search stick with a navy background,
+  // hide while scrolling down and come back when scrolling up.
+  let lastTop = 0;
+  view.addEventListener('scroll', () => {
+    const top = view.scrollTop;
+    const data = tab === 'data';
+    app.classList.toggle('data-stuck', data && top > 44);
+    if (!data || top <= 200) app.classList.remove('data-hidden');
+    else if (top > lastTop + 2) app.classList.add('data-hidden');
+    else if (top < lastTop - 2) app.classList.remove('data-hidden');
+    lastTop = top;
+  });
 
   // ---------- tabs ----------
   let tab = 'services';
   function render() {
-    $('#searchBox').hidden = tab !== 'services';
-    $('#title').textContent = { services: 'خدمات', data: 'بيانات', notifications: 'إشعارات', appointments: 'مواعيد', report: 'بلّغ' }[tab];
+    app.classList.remove('data-stuck', 'data-hidden');
+    view.scrollTop = 0;
     if (tab === 'services') return renderServices();
     if (tab === 'data') return renderData();
-    content.textContent = '';
-    content.append(el('div', 'out-of-scope', 'هذا القسم خارج نطاق النموذج التجريبي'));
+    view.textContent = '';
+    view.append(el('div', 'out-of-scope', 'هذا القسم خارج نطاق النموذج التجريبي'));
   }
   document.querySelectorAll('#nav button').forEach((b) => b.addEventListener('click', () => {
     tab = b.dataset.tab;
     document.querySelectorAll('#nav button').forEach((x) => x.classList.toggle('active', x === b));
-    content.scrollTop = 0;
     render();
   }));
 
@@ -435,8 +580,8 @@ nav.bottom button.active { color: var(--blue); }
   const msgs = $('#msgs');
   let busy = false;
 
-  function openChat() { screen.classList.add('chat-open'); setTimeout(() => $('#chatInput').focus({ preventScroll: true }), 220); }
-  function closeChat() { screen.classList.remove('chat-open'); $('#chatInput').blur(); }
+  function openChat() { app.classList.add('chat-open'); setTimeout(() => $('#chatInput').focus({ preventScroll: true }), 220); }
+  function closeChat() { app.classList.remove('chat-open'); $('#chatInput').blur(); }
   $('#agentBtn').addEventListener('click', openChat);
   $('#backdrop').addEventListener('click', closeChat);
   $('#closeChat').addEventListener('click', closeChat);
@@ -495,9 +640,8 @@ nav.bottom button.active { color: var(--blue); }
   $('#quick').addEventListener('click', (e) => { if (e.target.tagName === 'BUTTON') send(e.target.textContent); });
 
   // ---------- settings ----------
-  function openSettings() { screen.classList.add('settings-open'); syncSettingsUI(); }
-  function closeSettings() { screen.classList.remove('settings-open'); }
-  $('#menu').addEventListener('click', openSettings);
+  function openSettings() { app.classList.add('settings-open'); syncSettingsUI(); }
+  function closeSettings() { app.classList.remove('settings-open'); }
   $('#closeSettings').addEventListener('click', closeSettings);
 
   function syncSettingsUI() {
@@ -534,7 +678,7 @@ nav.bottom button.active { color: var(--blue); }
     const r = $('#testResult'); r.className = 'result ok'; r.textContent = 'انمسحت المحادثة والمفتاح.';
   });
 
-  loadKB();
+  load();
 })();
 </script>
 </body>

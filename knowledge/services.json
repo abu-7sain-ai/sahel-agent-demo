@@ -1,6 +1,6 @@
 {
   "version": "2026-10-26",
-  "note": "Demo knowledge base. PACI and MOI service names come from Sahel screenshots (path_verified: true). Other covered agencies were researched from official sources; their Sahel category names are not confirmed (path_verified: false). Empty fields mean no accepted source was found. Sources: knowledge/SOURCES.md.",
+  "note": "Demo knowledge base. PACI and MOI service names come from Sahel screenshots (path_verified: true). Other covered agencies were researched from official sources; their Sahel category names are not confirmed (path_verified: false). Empty fields mean no accepted source was found. Sources: knowledge/SOURCES.md. Agency, category and service names match the Sahel screenshots character for character; older spellings are kept in aliases.",
   "agencies": [
     {
       "name": "تُواصل",
@@ -15,12 +15,18 @@
       "covered": false
     },
     {
-      "name": "الديوان الوطني لحقوق الإنسان",
-      "covered": false
+      "name": "الديوان الوطنى لحقوق الإنسان",
+      "covered": false,
+      "aliases": [
+        "الديوان الوطني لحقوق الإنسان"
+      ]
     },
     {
-      "name": "المؤسسة العامة للتأمينات الاجتماعية",
-      "covered": false
+      "name": "المؤسسة العامة للتأمينات الإجتماعية",
+      "covered": false,
+      "aliases": [
+        "المؤسسة العامة للتأمينات الاجتماعية"
+      ]
     },
     {
       "name": "المؤسسة العامة للرعاية السكنية",

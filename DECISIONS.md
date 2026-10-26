@@ -68,3 +68,75 @@ Choices made where the constitution was silent or ambiguous. Phase 1 answers (A1
     - shows a macOS dialog if Node or the project is missing
 41. **macOS Desktop copy** (`scripts/make-shortcut.sh`). It copies the bundle to `~/Desktop/إيجنت سهل.app` with `ditto`, which overwrites an old copy in place, and writes `project-path`. It also runs `chmod +x` and clears any quarantine flag. The bundle isn't signed: a locally copied shell-script app that isn't quarantined opens without a Gatekeeper prompt.
 42. **The macOS app runs the server in the background with no window.** To stop it, use `lsof -ti tcp:5318 | xargs kill`, or use `start-demo.command`, which keeps a Terminal window you can close with Ctrl+C. This is the macOS equivalent of the minimized console on Windows.
+
+## Pixel-faithful Sahel UI and the invented profile (2026-10-26)
+43. **Screenshots.** There are 53 of them in `screenshots/`. They are git-ignored, contain real personal data, and are used only for layout, colours, fonts and menu text. They are 576×1280 Android captures, not iPhone 3×. So the app area is 390×866.67 CSS px, and 1 CSS px = 576/390 = 1.4769 screenshot px. The yellow demo bar sits above that area, so everything below the bar lines up with the screenshots. sahel_18 is skipped because a personal notification covers it, and the black bars at the bottom of sahel_02, 30 and 36 are cropped out.
+44. **Measurements.** `scripts/measure.py` (Pillow) samples colours and finds dividers, ink boxes and element edges, then prints CSS values. The final table (screenshot px → CSS px):
+
+| Element | Screenshot | CSS (used) |
+|---|---|---|
+| Page background | #1C1C1E | #1C1C1E |
+| Status bar | clock right, 10 px digit ink | 30 px high, 13.5px/600 Eastern digits, 24 h |
+| Title "خدمات"/"بيانات" | ink right 18 px from edge, 26 px ink | 22.6px/500, right 18 px, row 45 px |
+| Header icons | menu x 19–53, megaphone x 93–122 | menu 23×15 at left 13, megaphone 20×17, gap 27 |
+| Services search | x 39–537, y 164–211, #141414 | inset 26.4, top 111, 32.5 high, radius 9 |
+| Placeholder | #B8B8B8 italic | 15.5px italic #ABABAE |
+| Agency row pitch | 85.5 px | 57.9 px, divider #252527 |
+| Agency logo | 66 px circle, 12 px from right | 44.7 px, 8 px from right (letter circle) |
+| Agency name | right edge 63 css from right, 24 px ink | 15.3px/400 |
+| Chevron | x 22–37, 15×9 px | 11×7 at left 15 |
+| Category row pitch | 66 px, text right 31.8 css, #3A7FE4 | 44.7 px, 15.2px/700 |
+| Category triangle | x 24–36 | 10×5 filled, left 15 |
+| Service row pitch | 82 px, text top-aligned | 56 px, padding-top 6.5, 14.8px/400 |
+| Service divider | x 0–530, #212123 | right inset 31, #232325 |
+| Gap after last service / category | ~30 px | 20 px |
+| Data search | x 15–560, y 236–286 | inset 10.8, top 160, 34 high, radius 10 |
+| Avatar | 89 px, right 31 px, top 131 px | 60.3 px, right 21, top 88.7 |
+| Name / civil ID | right 102 css, ink 16 / 10 px | 15.6px/500 · 12.6px #D6DAE5 |
+| View-mode row | text #3D82EA, icons x 22–84 | 51.5 px row, 14.2px label |
+| Sub-section row pitch | 67 px, text right 485 px | 45.4 px, 15.75px/400 |
+| Field label | bold, #4682F4/#3D82EA | 15.5px/700 #3D82EA |
+| Value box | x 18–485, 50 px high, 63 px pitch, border #343436 | 34 px, 42.7 pitch, right inset 59.6–61.6, border 1.4 px #38383A, radius 8 |
+| "•••" | three 7 px dots at x 43–67 | 4.6 px dots, padding-left 16 |
+| Alert dots | red #F20600 / yellow #FBBA42, 11 px, x 62–73 | 7.4 px, left 42 |
+| Collapsed data header | #1D232F, bottom at 253 px | #1D232F, search #151922 |
+| "?" button | 61 px at x 23, y 1056, #19375B | agent button 41.3 px, left 15.6, top 715 |
+| Bottom nav | 88 css, active #3085FA, inactive #D7D7D9 | 88 px, 5 equal columns, icons 27 px |
+| Badge | 25 px red #FE352E at x 476–501 | 17 px, "4" |
+| Home indicator | x 187–388, y 1266–1271 | 136 × 3.5 px |
+
+45. **Font** (`scripts/font-compare.js`, `assets/font-compare.png`). Each candidate is rendered for five services-list text crops (title, agency, category, service, placeholder), sized to the same ink width and aligned on the crop's ink box, then scored by mean luminance difference (lower is closer). Totals:
+    - Noto Kufi Arabic: **127.96**
+    - Cairo: 136.35
+    - Tajawal: 141.67
+    - IBM Plex Sans Arabic: 170.27
+
+    Noto Kufi also matches the angular Kufi letterforms by eye. It replaces Cairo (decision 26), and the Cairo files were removed. Weights came from the per-weight scores: title 500, agency 400, service 400 (500 scored slightly better, but 400 looks closer in the composites), category 700 (500 scored best, but 700 matches the visible stroke). The placeholder uses the browser's synthetic italic, as in the app.
+46. **Menu text.** All 40 agencies and every PACI and MOI category and service were compared character by character with the screenshots. Only two agency names differed:
+    - «الديوان الوطنى لحقوق الإنسان» (ى)
+    - «المؤسسة العامة للتأمينات الإجتماعية» (إ)
+
+    The knowledge base, constitution §5 and the Data tab now use the app's spelling. The old spellings are kept as agency `aliases`, and search matches both. The four researched agencies still have no screenshot of their menus, so they stay approximate (A1).
+47. **Layout behaviour copied from the screenshots:**
+    - service rows are top-aligned
+    - categories and sub-sections use small filled triangles
+    - a sub-section's divider sits under the whole expanded block
+    - the selected tab's icon is filled
+    - the Data title scrolls away, profile + search stick with a navy background, hide while scrolling down and return when scrolling up
+48. **Status-bar battery** shows a neutral "٨٠" in a grey pill, not the screenshot's red "١٥". The clock is live, 24 h, in Eastern Arabic digits.
+49. **Logos** stay letter circles (decision 21), at the measured circle size and position. They are the largest remaining visual difference, on purpose.
+50. **Agent button** takes the "?" button's place and size on every tab (41.3 px #19375B, left 15.6, top 715). On phones it is placed 110 px above the bottom instead.
+51. **Invented profile** (`data/profile.json`, served at `/api/profile`). Values are exactly as agreed:
+    - civil ID 288010100124: fails the civil-ID check digit, so it can't be a real person's
+    - plates 00-12345 and 00-67890
+    - sponsorship IDs 3000101000x: can never pass the check digit
+    - the rest as specified
+
+    I compared the invented numbers by eye against every number visible in the screenshots; none is equal. The 13 Data-tab agencies follow the screenshot order. Agencies the screenshots never show expanded (التأمينات, الصحة, التجارة, المواصلات, بنك الائتمان, الشئون الإسلامية, الشئون الاجتماعية, الكهرباء, الرعاية السكنية) expand to nothing. «حالة  البطاقة» keeps the app's double space.
+52. **Avatar** (`scripts/make-avatar.js`). An illustrated man in a white ghutra and black agal on a light blue background, drawn as SVG and rendered to PNG. No photo, nothing downloaded.
+53. **Visual regression** (`tests/visual/capture.js`, `npm run test:visual`):
+    - 10 states are rendered at 576×1280 into `tests/visual/*.png` (committed, contains only invented data)
+    - each is compared with its screenshot in `tests/visual/compare/` (git-ignored)
+    - each state is scrolled so its anchor row sits at the same y as in the screenshot, with the clock frozen at 14:13
+
+    Mean pixel difference per state went from 8.7–18.5 to 6.6–15.4. Most of what remains is the logos and the different (invented) values; see NOTES.md.

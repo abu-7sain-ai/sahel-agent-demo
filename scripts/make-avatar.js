@@ -1,0 +1,57 @@
+// Draws the invented citizen's avatar: a neutral illustrated man in a white ghutra and black agal
+// on a light background. Pure SVG drawn here, rendered to PNG by Playwright; not a photo, not downloaded.
+// Writes assets/avatar.png and public/img/avatar.png (512 px). Run: node scripts/make-avatar.js
+const fs = require('fs');
+const path = require('path');
+const { chromium } = require('@playwright/test');
+
+const SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFDCEB"/><stop offset="1" stop-color="#B7C7DB"/></linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E4E8EE"/></linearGradient>
+    <clipPath id="c"><circle cx="256" cy="256" r="256"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <!-- dishdasha shoulders -->
+    <path d="M40 512 C60 400 150 360 256 356 C362 360 452 400 472 512 Z" fill="#FAFBFC"/>
+    <path d="M226 360 L256 420 L286 360" fill="none" stroke="#D5DBE3" stroke-width="6" stroke-linecap="round"/>
+    <!-- ghutra falling behind the shoulders -->
+    <path d="M118 210 C110 300 120 380 96 470 L190 430 L186 250 Z" fill="url(#cloth)"/>
+    <path d="M394 210 C402 300 392 380 416 470 L322 430 L326 250 Z" fill="url(#cloth)"/>
+    <!-- neck -->
+    <path d="M222 300 L222 360 Q256 378 290 360 L290 300 Z" fill="#C99A76"/>
+    <!-- face -->
+    <ellipse cx="256" cy="238" rx="74" ry="90" fill="#D8AA86"/>
+    <!-- beard and moustache -->
+    <path d="M184 240 C186 300 214 334 256 336 C298 334 326 300 328 240 C318 276 300 292 286 296 C276 284 236 284 226 296 C212 292 194 276 184 240 Z" fill="#2B211C"/>
+    <path d="M224 276 C238 268 274 268 288 276 C276 282 236 282 224 276 Z" fill="#2B211C"/>
+    <path d="M238 298 Q256 306 274 298" fill="none" stroke="#8E5B4A" stroke-width="5" stroke-linecap="round"/>
+    <!-- eyes and brows -->
+    <ellipse cx="226" cy="230" rx="8" ry="6" fill="#2B211C"/>
+    <ellipse cx="286" cy="230" rx="8" ry="6" fill="#2B211C"/>
+    <path d="M206 210 Q226 200 244 208" fill="none" stroke="#2B211C" stroke-width="7" stroke-linecap="round"/>
+    <path d="M268 208 Q286 200 306 210" fill="none" stroke="#2B211C" stroke-width="7" stroke-linecap="round"/>
+    <path d="M256 236 L250 264 Q256 268 262 264" fill="none" stroke="#B9876A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- ghutra framing the face -->
+    <path d="M150 230 C150 140 200 96 256 96 C312 96 362 140 362 230 C360 260 348 300 330 320 C336 270 334 200 322 176 C300 150 212 150 190 176 C178 200 176 270 182 320 C164 300 152 260 150 230 Z" fill="url(#cloth)" stroke="#C3CCD8" stroke-width="3"/>
+    <path d="M190 176 C212 160 300 160 322 176" fill="none" stroke="#D5DBE3" stroke-width="4"/>
+    <!-- agal -->
+    <ellipse cx="256" cy="150" rx="92" ry="20" fill="none" stroke="#151515" stroke-width="13"/>
+    <ellipse cx="256" cy="134" rx="86" ry="17" fill="none" stroke="#151515" stroke-width="11"/>
+  </g>
+</svg>`;
+
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: 512, height: 512 } });
+  await page.setContent(`<body style="margin:0;background:transparent">${SVG.replace('<svg ', '<svg width="512" height="512" ')}</body>`);
+  const png = await page.screenshot({ omitBackground: true, clip: { x: 0, y: 0, width: 512, height: 512 } });
+  await browser.close();
+  const root = path.join(__dirname, '..');
+  fs.mkdirSync(path.join(root, 'public', 'img'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'assets', 'avatar.png'), png);
+  fs.writeFileSync(path.join(root, 'public', 'img', 'avatar.png'), png);
+  fs.writeFileSync(path.join(root, 'assets', 'avatar.svg'), SVG + '\n');
+  console.log('Wrote assets/avatar.png, assets/avatar.svg, public/img/avatar.png');
+})();
